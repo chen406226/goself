@@ -31,14 +31,15 @@ var db *sql.DB
 var lotList map[string]*lotType
 
 func main() {
-	var er error
-	db,er = sql.Open("mysql", "root:123456@tcp(192.168.0.193:3306)/test?charset=utf8")
-	checkErr(er)
+	//var er error
+	//db,er = sql.Open("mysql", "root:123456@tcp(192.168.0.193:3306)/test?charset=utf8")
+	//db,er = sql.Open("mysql", "root:OmLgjkxS9l(6Ck@/test?charset=utf8")
+	//checkErr(er)
 	firstRest = true
 	webs = make(map[string]string)
 	lotList = make(map[string]*lotType)
 	println("111111111111")
-	initLot()
+	//initLot()
 
 	println("3333333333")
 
@@ -54,15 +55,15 @@ func main() {
 
 	webs["time"] = "1590481936"
 	webs["passwd"] = "640e6ae0cb53c7ca3c6df174d3db8a22"
-	fmt.Println("webssssssssssssssssssssssssssssssssssss",webs)
 
 	//openMysql()
 	if firstRest {
-		resetwebs()
+		//resetwebs()
 		firstRest = false
 	}
 	fmt.Println("爬虫开始")
-	pachong()
+	//pachong()
+
 	//go task()
 	//go getdata()
 	http.HandleFunc("/", sayhelloName) //设置访问的路由
@@ -70,8 +71,10 @@ func main() {
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
-
 }
+
+
+
 
 func initLot()  {
 	//查询数据
@@ -595,9 +598,9 @@ func getdata()  {
 }
 
 type Profile struct {
-	Name    string
+	Name    string `json:"name"` //key转换成小写
 	//Hobbies []string
-	Hobbies  []interface{}
+	Hobbies  []interface{} `json:"hobbies"`
 }
 
 
@@ -653,16 +656,19 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 	//fmt.Fprintf(w, "Hello astaxie!") //这个写入到w的是输出到客户端的
 	//var bdss [] interface
 	
-	obj := map[string]interface{}{"name":"ck","sex":"Man","age":18}
-	//slice1 := [] interface{}{"不知道SB",34,"sdf"}
+	//obj := map[string]interface{}{"name":"ck","sex":"Man","age":18}
+	slice1 := [] interface{}{"不知道SB",34,"sdf"}
 	//profile := Profile{"Alex", []interface{}{"snowboarding", "programming"}}
-	//pro := Profile{"Alex", slice1}
-	//jss, _ := json.Marshal(pro)
+	pro := Profile{"Alex", slice1}
+	//js, _ := json.Marshal(pro)
+	//js, err := json.Marshal(pro)
+	js, err := json.Marshal(pro)
+
 	res := Res{"200","成功","8"}
 
 	fmt.Println("==========================",res)
 	//js, err := json.Marshal(res)
-	js, err := json.Marshal(obj)
+	//js, err := json.Marshal(obj)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
