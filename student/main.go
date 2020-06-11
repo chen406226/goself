@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"student/global"
+	"student/pdf1"
 )
 
 func main() {
-	fmt.Println("sdf")
-	println(global.Test())
+	//fmt.Println("sdf")
+	pdf1.Main()
+	//println(global.Test())
 }
