@@ -31,15 +31,16 @@ var db *sql.DB
 var lotList map[string]*lotType
 
 func main() {
-	//var er error
+	var er error
 	//db,er = sql.Open("mysql", "root:123456@tcp(192.168.0.193:3306)/test?charset=utf8")
 	//db,er = sql.Open("mysql", "root:OmLgjkxS9l(6Ck@/test?charset=utf8")
-	//checkErr(er)
+	db,er = sql.Open("mysql", "test_c:123456@/test_c?charset=utf8")
+	checkErr(er)
 	firstRest = true
 	webs = make(map[string]string)
 	lotList = make(map[string]*lotType)
 	println("111111111111")
-	//initLot()
+	initLot()
 
 	println("3333333333")
 
@@ -58,11 +59,11 @@ func main() {
 
 	//openMysql()
 	if firstRest {
-		//resetwebs()
+		resetwebs()
 		firstRest = false
 	}
 	fmt.Println("爬虫开始")
-	//pachong()
+	pachong()
 
 	//go task()
 	//go getdata()
@@ -184,14 +185,14 @@ func pachong() {
 	c := cron.New(cron.WithSeconds())
 	c.AddFunc("*/30 * * * * *", func() {
 		timestamp := time.Now().Unix()
-		fmt.Println("进入task，不知道进没进循环:",time.Now())
+		fmt.Println("进入task，不知道请求没:",time.Now())
 		for key,s := range lotList {
 			if s.nextTime<timestamp-10 {
 				fmt.Println(time.Now(),"开始",key,time.Unix(s.nextTime, 0).Format("02/01/2006 15:04:05 PM"))
 				go doasync(s)
 				fmt.Println(time.Now(),"结束",key)
 			}else{
-				fmt.Println("进入task，没有进入循环:",time.Unix(s.nextTime, 0).Format("02/01/2006 15:04:05 PM"))
+				fmt.Println("进入task，没有发送请求:",time.Unix(s.nextTime, 0).Format("02/01/2006 15:04:05 PM"))
 			}
 		}
 	})

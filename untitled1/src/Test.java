@@ -1,6 +1,11 @@
+import com.lottery.persistent.domain.Ticket;
 import com.sun.deploy.util.StringUtils;
 
 import java.util.*;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class Test {
     static String table = "fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF";
@@ -35,5 +40,20 @@ public class Test {
             r[s[i]]= String.valueOf(table.charAt((int) ((x/(Math.pow(58, i)))%58)));
         }
         return StringUtils.join(Arrays.asList(r),"");
+    }
+    private void thread() {
+        BlockingQueue queue = new LinkedBlockingQueue();
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 2, 2, TimeUnit.SECONDS, queue);
+        executor.allowCoreThreadTimeOut(true);
+        executor.execute( new Runnable() {
+            public void run() {
+                try {
+
+                }catch (){
+
+                }
+                executor.shutdown();
+            }
+        }
     }
 }
