@@ -1,16 +1,27 @@
 package global
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/go-redis/redis"
+	"github.com/jinzhu/gorm"
+	"github.com/op/go-logging"
+	"github.com/spf13/viper"
+	"student/config"
+)
 
 var (
-	S_DB string
+	GL_DB		*gorm.DB		//mysql
+	GL_REDIS 	*redis.Client	//redis
+	GL_VP		*viper.Viper	//配置文件读取
+	GL_LOG		*logging.Logger //日志
+	GL_CONFIG	*config.Server
 )
 
 func init() {
 	fmt.Println("init")
 }
 
-func Test()sting  {
+func Test()string  {
 	fmt.Println("initsfd")
 	return "dsf"
 }

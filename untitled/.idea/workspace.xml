@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4231725b-d54e-43a0-8f66-55000a5dd87f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../face_recognition" beforeDir="false" afterPath="$PROJECT_DIR$/../face_recognition" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../goface/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../goface/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go_build_Main_go.exe" beforeDir="false" afterPath="$PROJECT_DIR$/go_build_Main_go.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled.iml" beforeDir="false" afterPath="$PROJECT_DIR$/untitled.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +148,7 @@
       <workItem from="1592288218327" duration="6971000" />
       <workItem from="1592356399809" duration="894000" />
       <workItem from="1592357775534" duration="1262000" />
+      <workItem from="1593657272330" duration="71000" />
     </task>
     <servers />
   </component>
@@ -177,10 +176,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="509" y="219" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1592288999249" />
-    <state x="633" y="320" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590639073628">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="2553" y="320" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593657284219">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="633" y="320" key="#com.intellij.fileTypes.FileTypeChooser/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1590639073628" />
+    <state x="2553" y="320" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1593657284219" />
     <state x="797" y="266" key="#go_build_Hello.go" timestamp="1589267492870">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
