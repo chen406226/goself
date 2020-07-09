@@ -23,16 +23,15 @@ func init() {
 	v.WatchConfig()
 	v.OnConfigChange(func(e fsnotify.Event) {
 		fmt.Println("config file changed:",e.Name)
-		if err := v.Unmarshal(*global.GL_CONFIG); err != nil {
+		if err := v.Unmarshal(&global.GL_CONFIG); err != nil {
 			fmt.Println("Error23",err)
 		}
 	})
-
 	//反序列化未struct -> GL_CONFIG
 	if err := v.Unmarshal(&global.GL_CONFIG); err != nil {
 		fmt.Println("Error27",err)
 	}
 	global.GL_VP = v
-	fmt.Println("config.go-init:after")
+	fmt.Println("CONFIG.SETTING:SUCCESS")
 }
 

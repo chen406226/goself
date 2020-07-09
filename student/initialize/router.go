@@ -3,6 +3,9 @@ package initialize
 import (
 	"github.com/gin-gonic/gin"
 	"student/global"
+	"student/router"
+
+	//"student/router"
 )
 
 func Router() *gin.Engine {
@@ -13,7 +16,8 @@ func Router() *gin.Engine {
 	//Router.Use(middleware.Cors())
 	//global.GVA_LOG.Debug("use middleware cors")
 	ApiGroup := Router.Group("")
-	_ = ApiGroup
+	//router.InitUserRouter(ApiGroup)							//注册用户路由
+	router.InitBaseRouter(ApiGroup)							// 注册基础功能路由 不做鉴权
 	global.GL_LOG.Info("router register success")
 	return Router
 }

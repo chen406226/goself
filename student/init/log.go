@@ -24,7 +24,9 @@ var (
 )
 
 func init() {
+	fmt.Errorf("logger prefix not found")
 	c := global.GL_CONFIG.Log
+	fmt.Errorf("logger preffdssfdix not found")
 	if c.Prefix == "" {
 		fmt.Errorf("logger prefix not found")
 	}

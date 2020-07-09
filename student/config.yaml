@@ -28,3 +28,18 @@ log:
   log-file: true
   stdout: 'DEBUG'
   file: 'DEBUG'
+
+# jwt configuration
+jwt:
+  signing-key: 'qmPlus'
+
+# casbin configuration
+casbin:
+  model-path: './resource/rbac_model.conf'
+
+# captcha configuration
+captcha:
+  expiration: 5
+  key-long: 4
+  img-width: 120
+  img-height: 40

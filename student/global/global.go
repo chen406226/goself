@@ -1,7 +1,6 @@
 package global
 
 import (
-	"fmt"
 	"github.com/go-redis/redis"
 	"github.com/jinzhu/gorm"
 	"github.com/op/go-logging"
@@ -16,12 +15,3 @@ var (
 	GL_LOG		*logging.Logger //日志
 	GL_CONFIG	*config.Server
 )
-
-func init() {
-	fmt.Println("init")
-}
-
-func Test()string  {
-	fmt.Println("initsfd")
-	return "dsf"
-}

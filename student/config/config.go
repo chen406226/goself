@@ -31,9 +31,27 @@ type System struct {
 	DbType        string `mapstructure:"db-type" json:"dbType" yaml:"db-type"`
 }
 
+type JWT struct {
+	SigningKey	string `mapstructure:"signing-key" json:"signingKey" yaml:"signing-key"`
+}
+
 type Server struct {
-	Mysql  Mysql  `mapstructure:"mysql" json:"mysql" yaml:"mysql"`
-	Redis  Redis  `mapstructure:"redis" json:"redis" yaml:"redis"`
-	System System `mapstructure:"system" json:"system" yaml:"system"`
-	Log    Log	  `mapstructure:"log" json:"log" yaml:"log"`
+	Mysql	Mysql	`mapstructure:"mysql" json:"mysql" yaml:"mysql"`
+	Redis	Redis	`mapstructure:"redis" json:"redis" yaml:"redis"`
+	System	System	`mapstructure:"system" json:"system" yaml:"system"`
+	Log		Log		`mapstructure:"log" json:"log" yaml:"log"`
+	JWT		JWT		`mapstructure:"jwt" json:"jwt" yaml:"jwt"`
+	Casbin  Casbin  `mapstructure:"casbin" json:"casbin" yaml:"casbin"`
+	Captcha	Captcha	`mapstructure:"captcha" json:"captcha" yaml:"captcha"`
+}
+
+type Casbin struct {
+	ModelPath	string	`mapstructure:"model-path" json:"modelPath" yaml:"model-path"`
+}
+
+type Captcha struct {
+	Expiration	int	`mapstructure:"expiration" json:"expiration" yaml:"expiration"`
+	KeyLong		int	`mapstructure:"key-long" json:"keyLong" yaml:"key-long"`
+	ImgWidth	int	`mapstructure:"img-width" json:"imgWidth" yaml:"img-width"`
+	ImgHeight	int	`mapstructure:"img-height" json:"imgHeight" yaml:"img-height"`
 }
