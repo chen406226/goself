@@ -1,0 +1,12 @@
+[LOG--:]2020/07/10 - 09:12:33.798 C:/IDEAForGo/GoProject/src/student/initialize/db_tables.go:25 ▶ [DEBUG] register db tables success
+[LOG--:]2020/07/10 - 09:12:33.804 C:/IDEAForGo/GoProject/src/student/initialize/router.go:14 ▶ [DEBUG] use middleware logger
+[LOG--:]2020/07/10 - 09:12:33.804 C:/IDEAForGo/GoProject/src/student/initialize/router.go:21 ▶ [INFO] router register success
+[LOG--:]2020/07/10 - 09:12:33.805 C:/IDEAForGo/GoProject/src/student/init/server.go:30 ▶ [DEBUG] server run success on  :8889
+[LOG--:]2020/07/10 - 10:06:11.980 C:/IDEAForGo/GoProject/src/student/initialize/db_tables.go:25 ▶ [DEBUG] register db tables success
+[LOG--:]2020/07/10 - 10:06:11.983 C:/IDEAForGo/GoProject/src/student/initialize/router.go:14 ▶ [DEBUG] use middleware logger
+[LOG--:]2020/07/10 - 10:06:11.984 C:/IDEAForGo/GoProject/src/student/initialize/router.go:21 ▶ [INFO] router register success
+[LOG--:]2020/07/10 - 10:06:11.985 C:/IDEAForGo/GoProject/src/student/init/server.go:30 ▶ [DEBUG] server run success on  :8889
+[LOG--:]2020/07/10 - 10:35:23.785 C:/IDEAForGo/GoProject/src/student/initialize/db_tables.go:25 ▶ [DEBUG] register db tables success
+[LOG--:]2020/07/10 - 10:35:23.787 C:/IDEAForGo/GoProject/src/student/initialize/router.go:14 ▶ [DEBUG] use middleware logger
+[LOG--:]2020/07/10 - 10:35:23.787 C:/IDEAForGo/GoProject/src/student/initialize/router.go:22 ▶ [INFO] router register success
+[LOG--:]2020/07/10 - 10:35:23.788 C:/IDEAForGo/GoProject/src/student/init/server.go:30 ▶ [DEBUG] server run success on  :8889

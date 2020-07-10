@@ -5,6 +5,17 @@ import (
 	model "student/model/mysqlDb"
 )
 
+// @title    JsonInBlacklist
+// @description   create jwt blacklist
+// @param     jwtList         model.JwtBlacklist
+// @auth                     （2020/04/05  20:22）
+// @return    err             error
+
+func JsonInBlacklist(jwtList model.JwtBlacklist) (err error) {
+	err = global.GL_DB.Create(&jwtList).Error
+	return
+}
+
 // @title    IsBlacklist
 // @description   check if the Jwt is in the blacklist or not, 判断JWT是否在黑名单内部
 // @auth                     （2020/04/05  20:22）
@@ -15,4 +26,27 @@ import (
 func IsBlacklist(jwt string,jwtList model.JwtBlacklist) bool {
 	isNotFound := global.GL_DB.Where("jwt = ?",jwt).First(&jwtList).RecordNotFound()
 	return !isNotFound
+}
+
+// @title    GetRedisJWT
+// @description   Get user info in redis
+// @auth                     （2020/04/05  20:22）
+// @param     userName        string
+// @return    err             error
+// @return    redisJWT        string
+func GetRedisJWT(userName string) (err error, redisJWT string) {
+	redisJWT, err = global.GL_REDIS.Get(userName).Result()
+	return
+}
+
+// @title    SetRedisJWT
+// @description   set jwt into the Redis
+// @auth                     （2020/04/05  20:22）
+// @param     jwtList         model.JwtBlacklist
+// @param     userName        string
+// @return    err             error
+
+func SetRedisJWT(jwtList model.JwtBlacklist,username string) (err error,) {
+	err = global.GL_REDIS.Set(username,jwtList.Jwt,1000*1000*1000*60*60*24*7).Err()
+	return
 }
