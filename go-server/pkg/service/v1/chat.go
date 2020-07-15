@@ -39,6 +39,7 @@ func (s *chatServiceServer) Subscribe(e *empty.Empty, stream v1.ChatService_Subs
 	for {
 		m := <-s.msg
 		n := v1.Message{Text: fmt.Sprintf("I have received from you: %s. Thanks!", m)}
+		fmt.Println("sfdsdf",stream)
 		if err := stream.Send(&n); err != nil {
 			// put message back to the channel
 			s.msg <- m

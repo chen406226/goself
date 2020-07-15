@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ab46c13b-085d-4f3e-969a-b9ea9fa04080" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="C:\Go" />
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+    <option name="useGoPathFromSystemEnvironment" value="false" />
+  </component>
+  <component name="ProjectId" id="1ckJjix1nYweHHYIFwrGgyYwnbW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../src/github.com/Kagami/go-face" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.40229884" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\go\pkg\mod\gopl.io@v0.0.0-20200323155855-65c318dde95e\ch8\thumbnail" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Build.go build main.go (1)">
+    <configuration name="go build chat.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="gopl.io@v0.0.0-20200323155855-65c318dde95e" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/ch8/chat/chat.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build main.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="gopl.io@v0.0.0-20200323155855-65c318dde95e" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/ch8/chatself/main.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build main.go (2)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="gopl.io@v0.0.0-20200323155855-65c318dde95e" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/ch2/cf/main.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="gopl.io@v0.0.0-20200323155855-65c318dde95e" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/ch1/dup1/main.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build netcat.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="gopl.io@v0.0.0-20200323155855-65c318dde95e" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/ch8/netcat3/netcat.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Go Build.go build main.go" />
+      <item itemvalue="Go Build.go build main.go (2)" />
+      <item itemvalue="Go Build.go build chat.go" />
+      <item itemvalue="Go Build.go build netcat.go" />
+      <item itemvalue="Go Build.go build main.go (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build main.go (1)" />
+        <item itemvalue="Go Build.go build chat.go" />
+        <item itemvalue="Go Build.go build netcat.go" />
+        <item itemvalue="Go Build.go build main.go" />
+        <item itemvalue="Go Build.go build main.go (2)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ab46c13b-085d-4f3e-969a-b9ea9fa04080" name="Default Changelist" comment="" />
+      <created>1591066794886</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591066794886</updated>
+      <workItem from="1591066796971" duration="14424000" />
+      <workItem from="1591152397920" duration="5758000" />
+      <workItem from="1591168941984" duration="3803000" />
+      <workItem from="1591233539364" duration="20031000" />
+      <workItem from="1591320319057" duration="7283000" />
+      <workItem from="1591579594876" duration="11275000" />
+      <workItem from="1591669781362" duration="13991000" />
+      <workItem from="1591752057638" duration="16418000" />
+      <workItem from="1591838006427" duration="14086000" />
+      <workItem from="1591922818871" duration="22051000" />
+      <workItem from="1592184183685" duration="19648000" />
+      <workItem from="1592271033903" duration="19085000" />
+      <workItem from="1592357789965" duration="21574000" />
+      <workItem from="1592441010866" duration="7488000" />
+      <workItem from="1592529198844" duration="756000" />
+      <workItem from="1592530286139" duration="8745000" />
+      <workItem from="1592787956289" duration="17984000" />
+      <workItem from="1592892100421" duration="9000" />
+      <workItem from="1592892141893" duration="1509000" />
+      <workItem from="1592896989592" duration="632000" />
+      <workItem from="1592992765220" duration="98000" />
+      <workItem from="1593410690810" duration="197000" />
+      <workItem from="1594367845278" duration="2835000" />
+      <workItem from="1594370724204" duration="1206000" />
+      <workItem from="1594707859754" duration="11823000" />
+      <workItem from="1594778193763" duration="4984000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="619" y="162" key="#Build_Tags_&amp;_Vendoring" timestamp="1592211008924">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="619" y="162" key="#Build_Tags_&amp;_Vendoring/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1592211008924" />
+    <state x="598" y="170" key="#GOROOT" timestamp="1591066841580">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="598" y="170" key="#GOROOT/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1591066841580" />
+    <state x="576" y="180" key="#Inspections" timestamp="1592287544059">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="576" y="180" key="#Inspections/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1592287544059" />
+    <state x="508" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592375333639">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="508" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1592375333639" />
+    <state x="867" y="578" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1591170838490">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="867" y="578" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1591170838490" />
+    <state x="966" y="344" key="FileChooserDialogImpl" timestamp="1593410885612">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="966" y="344" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1593410885612" />
+    <state width="1360" height="185" key="GridCell.Tab.0.bottom" timestamp="1594782010526">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1552" height="266" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1593410887660" />
+    <state width="1360" height="185" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594782010526" />
+    <state width="1360" height="185" key="GridCell.Tab.0.center" timestamp="1594782010526">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1552" height="266" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1593410887660" />
+    <state width="1360" height="185" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594782010526" />
+    <state width="1360" height="185" key="GridCell.Tab.0.left" timestamp="1594782010526">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1552" height="266" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1593410887660" />
+    <state width="1360" height="185" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594782010526" />
+    <state width="1360" height="185" key="GridCell.Tab.0.right" timestamp="1594782010526">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1552" height="266" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1593410887660" />
+    <state width="1360" height="185" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594782010526" />
+    <state x="499" y="289" key="IDE.errors.dialog" timestamp="1591069824969">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="499" y="289" key="IDE.errors.dialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1591069824969" />
+    <state x="663" y="77" key="SettingsEditor" timestamp="1593410712003">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="663" y="77" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1593410712003" />
+    <state x="641" y="326" key="com.intellij.ide.util.TipDialog" timestamp="1592892146658">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="641" y="326" key="com.intellij.ide.util.TipDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1592892146658" />
+    <state x="895" y="441" width="647" height="534" key="find.popup" timestamp="1591868791917">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="895" y="441" width="647" height="534" key="find.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1591868791917" />
+    <state x="669" y="239" key="new project wizard" timestamp="1591171419797">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="669" y="239" key="new project wizard/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1591171419797" />
+    <state x="860" y="289" width="672" height="678" key="search.everywhere.popup" timestamp="1592379542942">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="860" y="289" width="672" height="678" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1592379542942" />
+    <state x="2759" y="418" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1594369323872">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="839" y="418" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1592809800130" />
+    <state x="2759" y="418" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1594369323872" />
+  </component>
+</project>
