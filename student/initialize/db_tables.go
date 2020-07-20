@@ -21,6 +21,7 @@ func DBTables()  {
 		model.ExaFileUploadAndDownload{},
 		model.ExaFile{},
 		model.ExaFileChunk{},
+		model.ChatUser{},
 	)
 	global.GL_LOG.Debug("register db tables success")
 }

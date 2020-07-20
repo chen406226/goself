@@ -18,7 +18,8 @@ func Router() *gin.Engine {
 	ApiGroup := Router.Group("")
 	//router.InitUserRouter(ApiGroup)							//注册用户路由
 	router.InitBaseRouter(ApiGroup)							// 注册基础功能路由 不做鉴权
-	router.InitJwtRouter(ApiGroup)							//token操作
+	router.InitJwtRouter(ApiGroup)							// token操作
+	router.InitChatUserRouter(ApiGroup)						// 聊天用户
 	global.GL_LOG.Info("router register success")
 	return Router
 }

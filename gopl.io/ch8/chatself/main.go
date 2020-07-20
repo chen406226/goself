@@ -21,6 +21,7 @@ var (
 	entering = make(chan client)
 	leaving  = make(chan client)
 	messages = make(chan string) // all incoming client messages
+	Scli = make(chan string)
 )
 
 func broadcaster() {
@@ -35,6 +36,7 @@ func broadcaster() {
 			}
 
 		case cli := <-entering:
+			fmt.Println(cli==Scli,"shi对的吗")
 			clients[cli] = true
 
 		case cli := <-leaving:
@@ -52,8 +54,9 @@ func handleConn(conn net.Conn) {
 	go clientWriter(conn, ch)
 
 	who := conn.RemoteAddr().String()
-	ch <- "You are " + who
+	//ch <- "You are " + who
 	messages <- who + " has arrived"
+	//Scli = ch
 	entering <- ch
 
 	input := bufio.NewScanner(conn)
@@ -77,7 +80,7 @@ func clientWriter(conn net.Conn, ch <-chan string) {
 
 //!+main
 func main() {
-	listener, err := net.Listen("tcp", "0.0.0.0:8000")
+	listener, err := net.Listen("tcp", "0.0.0.0:7001")
 	if err != nil {
 		log.Fatal(err)
 	}
