@@ -7,6 +7,7 @@ import (
 	"net"
 	"regexp"
 	"student/global"
+	chatService "student/service/chat"
 )
 
 //!+broadcaster
@@ -64,10 +65,14 @@ func broadcaster() {
 			//roomStr := params[3]
 			//roomNum, _ := strconv.Atoi(roomStr)
 			//message := params[4]
-			//fromUser := params[1]
 			toUser := params[2]
 			if toUserLogined,ok := loggedlist[toUser];ok{
+				// receive is login
 				toUserLogined.chatChan <- msg
+			} else {
+				// receive not login save msg
+				fromUser := params[1]
+				chatService.SaveMessage(fromUser,toUser,msg)
 			}
 
 			//if chatRoom ,ok := room[roomNum]; ok {
@@ -129,7 +134,18 @@ func handleConn(conn net.Conn) {
 			fromUser = params[1]
 			linked = true
 			global.GL_LOG.Info("uuid:",fromUser,who,":连接聊天服务器")
-			loggedlist[fromUser] = &Logged{uuid:fromUser,chatChan:ch}
+			go func() {
+				loggedlist[fromUser] = &Logged{uuid:fromUser,chatChan:ch}
+				unreadMessagelist := chatService.GetMessageByToUuid(fromUser)
+				if len(unreadMessagelist)>=1 {
+					for _,v := range unreadMessagelist {
+						ch <- v.Message
+					}
+				}
+				defer func() {
+					chatService.DeleteExpiredMessage(fromUser)
+				}()
+			}()
 		}
 	}
 	// NOTE: ignoring potential errors from input.Err()
