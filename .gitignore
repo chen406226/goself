@@ -1,0 +1,33 @@
+.DS_Store
+node_modules
+/dist
+/android
+/ios
+/build
+android
+ios
+build
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+gopl.io/.idea
+
+# Editor directories and files
+.idea
+.dart_tool
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+.idea/
+.history/
+package-lock.json
+*.log

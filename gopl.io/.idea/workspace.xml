@@ -4,16 +4,9 @@
     <list default="true" id="ab46c13b-085d-4f3e-969a-b9ea9fa04080" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../face_recognition" beforeDir="false" afterPath="$PROJECT_DIR$/../face_recognition" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ch8/chatself/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/ch8/chatself/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ch8/netcat3/netcat.go" beforeDir="false" afterPath="$PROJECT_DIR$/ch8/netcat3/netcat.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../student/init/chatServer.go" beforeDir="false" afterPath="$PROJECT_DIR$/../student/init/chatServer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../student/initialize/db_tables.go" beforeDir="false" afterPath="$PROJECT_DIR$/../student/initialize/db_tables.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../student/initialize/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/../student/initialize/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../student/latest_log" beforeDir="false" afterPath="$PROJECT_DIR$/../student/latest_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../student/log/2020-07-03-08-00.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../student/log/2020-07-08-08-00.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../student/log/2020-07-09-08-00.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../student/log/2020-07-10-08-00.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../student/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../student/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,6 +166,7 @@
       <workItem from="1594798404397" duration="1351000" />
       <workItem from="1594968993583" duration="3203000" />
       <workItem from="1595207649069" duration="9054000" />
+      <workItem from="1595294237439" duration="1274000" />
     </task>
     <servers />
   </component>

@@ -23,6 +23,8 @@ func DBTables()  {
 		model.ExaFileChunk{},
 		model.ChatUser{},
 		model.ChatUnreadMessage{},
+		model.ChatUserFriendList{},
+		model.ChatSystemNotice{},
 	)
 	global.GL_LOG.Debug("register db tables success")
 }
