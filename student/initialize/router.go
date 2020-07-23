@@ -20,6 +20,7 @@ func Router() *gin.Engine {
 	router.InitBaseRouter(ApiGroup)							// 注册基础功能路由 不做鉴权
 	router.InitJwtRouter(ApiGroup)							// token操作
 	router.InitChatUserRouter(ApiGroup)						// 聊天用户
+	router.InitChatSysNoticeRouter(ApiGroup)						// 聊天系统推送
 	global.GL_LOG.Info("router register success")
 	return Router
 }

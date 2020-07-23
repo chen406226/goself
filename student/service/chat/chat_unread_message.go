@@ -12,7 +12,6 @@ func SaveMessage(fromU string,toU string,msg string)  {
 		ToUuid:   toU,
 		Message:  msg,
 	}
-	fmt.Println("baocun",M)
 	err := global.GL_DB.Create(M).Error
 	if err != nil {
 		global.GL_LOG.Error(fmt.Sprintf("保存消息错误cause:%v", err))
