@@ -78,6 +78,34 @@ func Login(c *gin.Context) {
 
 }
 
+// @Tags Base
+// @Summary 搜索用户
+// @Produce  application/json
+// @Param data body request.RegisterAndLoginStruct true "用户登录接口"
+// @Success 200 {string} string "{"success":true,"data":{user:User{}},"msg":"查询成功"}"
+// @Router /chat/login [post]
+func SearchUserByUserName(c *gin.Context) {
+	var L request.SearchUserStruct
+	_ = c.ShouldBindJSON(&L)
+	UserVerify := utils.Rules{
+		"Username":  {utils.NotEmpty()},
+	}
+	UserVerifyErr := utils.Verify(L, UserVerify)
+	if UserVerifyErr != nil {
+		response.FailWithMessage(UserVerifyErr.Error(), c)
+		return
+	}
+	//if captcha.VerifyString(L.CaptchaId, L.Captcha) {
+	U := &mysqlDb.ChatUser{Username: L.Username}
+	if err, user := service.SearchChatUserByUsername(*U); err != nil {
+		response.FailWithMessage(fmt.Sprintf("%v", err), c)
+	} else {
+		response.Result(response.SUCCESS,resp.ChatUserResponse{User: user}, "查询成功", c)
+	}
+
+}
+
+
 // 登陆后签发jwt
 func tokenNext(c *gin.Context,user mysqlDb.ChatUser)  {
 	j := &middleware.JWT{[]byte(global.GL_CONFIG.JWT.SigningKey)}

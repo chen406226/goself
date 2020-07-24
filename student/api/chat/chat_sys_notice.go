@@ -44,7 +44,9 @@ func GetUserNotice(c *gin.Context)  {
 
 func SetUserNotice(c *gin.Context)  {
 	var NR request.SetChatSysNoticeStruct
+	//fmt.Println(c.Request.GetBody())
 	c.ShouldBindJSON(&NR)
+	fmt.Println(NR)
 	UserVerify	:= utils.Rules{
 		"title":	{utils.NotEmpty()},
 	}

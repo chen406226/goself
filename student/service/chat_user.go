@@ -40,3 +40,13 @@ func ChatLogin(u *mysqlDb.ChatUser) (err error, userInter *mysqlDb.ChatUser) {
 	}
 	return err, &user
 }
+
+func SearchChatUserByUsername(u mysqlDb.ChatUser) (err error,user mysqlDb.ChatUser) {
+	notRegister := global.GL_DB.Where("username = ?",u.Username).First(&user).RecordNotFound()
+	if notRegister {
+		//return errors.New("没有此用户"), user
+		return errors.New("没有此用户"), user
+	} else {
+		return nil, user
+	}
+}

@@ -15,8 +15,10 @@ func InitChatUserRouter(Router *gin.RouterGroup)  {
 		UserRouter.POST("login", chat.Login)			// 用户登录
 	}
 
-	FilterUserRouter := UserRouter.Use(middleware.JWTAuth()).Use(middleware.CasbinHandler())
+	//FilterUserRouter := UserRouter.Use(middleware.JWTAuth()).Use(middleware.CasbinHandler())
+	FilterUserRouter := UserRouter.Use(middleware.JWTAuth())
 	{
+		FilterUserRouter.POST("searchUserByUsername",chat.SearchUserByUserName)	// 搜索用户
 		FilterUserRouter.POST("changePassword",)	// 修改密码
 		FilterUserRouter.POST("uploadHeaderImg",)	// 上传头像
 		FilterUserRouter.DELETE("deleteUser",)		// 删除用户

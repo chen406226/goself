@@ -14,3 +14,7 @@ type ChatLoginStruct struct {
 	Password	string	`json:"password"`
 }
 
+// 搜索用户
+type SearchUserStruct struct {
+	Username	string	`json:"username"`
+}
