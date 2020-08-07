@@ -18,3 +18,14 @@ type ChatLoginStruct struct {
 type SearchUserStruct struct {
 	Username	string	`json:"username"`
 }
+
+// 朋友列表
+type ChatUserFriendStruct struct {
+	Username	string	`json:"username"`
+}
+
+// 朋友添加
+type ChatUserAddFriend struct {
+	Username	string	`json:"username"`
+	FriendUsername		string	`json:"friendUsername"`
+}

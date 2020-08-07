@@ -7,6 +7,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -14,7 +15,8 @@ import (
 
 func main() {
 	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+	http.HandleFunc("/upload", handlerUpload)
+	log.Fatal(http.ListenAndServe("localhost:8777", nil))
 }
 
 //!+handler
@@ -34,4 +36,28 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+type Data struct {
+	Code int `json:"code"`
+	Message string`json:"msg"`
+}
+
 //!-handler
+func handlerUpload(w http.ResponseWriter, r *http.Request) {
+	// Here the parameter is the size of the form data that should
+	// be loaded in memory, the remaining being put in temporary
+	// files
+	fmt.Println("jinlaile")
+	r.ParseMultipartForm(0)
+	//r.ParseMultipartForm(0)
+	if r.MultipartForm != nil {
+		fmt.Println(r.MultipartForm.Value,"dsfffffffffffffffffffff")
+	}
+	fmt.Println(r.FormValue("file"),"fileddddddd")
+	fmt.Println(r.FormValue("token"),"ddddddddddddddddddddddd")
+	jData, err := json.Marshal(Data{200,"http://www.baidu.com/img"})
+	if err != nil {
+		// handle error
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(jData)
+}

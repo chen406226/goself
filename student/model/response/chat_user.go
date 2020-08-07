@@ -11,3 +11,7 @@ type ChatLoginResponse struct {
 type ChatUserResponse struct {
 	User		mysqlDb.ChatUser	`json:"user"`
 }
+
+type ChatUserFriendResponse struct {
+	FriendList	[]mysqlDb.ChatUser	`json:"friendList"`
+}

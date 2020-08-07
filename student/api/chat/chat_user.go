@@ -13,6 +13,7 @@ import (
 	"student/model/request"
 	resp "student/model/response"
 	"student/service"
+	chatService "student/service/chat"
 	"student/utils"
 	"time"
 )
@@ -102,8 +103,53 @@ func SearchUserByUserName(c *gin.Context) {
 	} else {
 		response.Result(response.SUCCESS,resp.ChatUserResponse{User: user}, "查询成功", c)
 	}
-
 }
+
+
+func GetUserFriendList(c *gin.Context)  {
+	var U request.ChatUserFriendStruct
+	c.ShouldBindJSON(&U)
+	UserVerify	:= utils.Rules{
+		"Username":	{utils.NotEmpty()},
+	}
+	UserVerifyErr := utils.Verify(U,UserVerify)
+	if UserVerifyErr != nil {
+		response.FailWithMessage(UserVerifyErr.Error(), c)
+		return
+	}
+	user := mysqlDb.ChatUser{Username:U.Username}
+	err,userNoticeList := chatService.GetChatUserFriendList(user)
+	if err != nil {
+		response.Result(response.ERROR, resp.ChatUserFriendResponse{FriendList: userNoticeList}, fmt.Sprintf("%v", err), c)
+	} else {
+		response.Result(response.SUCCESS,resp.ChatUserFriendResponse{FriendList: userNoticeList}, "获取成功", c)
+	}
+}
+
+func SetUserAddFriend(c *gin.Context)  {
+	var userShip request.ChatUserAddFriend
+	c.ShouldBindJSON(&userShip)
+	UserVerify	:= utils.Rules{
+		"Username":	{utils.NotEmpty()},
+		"FriendUsername":	{utils.NotEmpty()},
+	}
+	UserVerifyErr := utils.Verify(userShip,UserVerify)
+	if UserVerifyErr != nil {
+		response.FailWithMessage(UserVerifyErr.Error(), c)
+		return
+	}
+	user1 := mysqlDb.ChatUser{Username:userShip.Username}
+	user2 := mysqlDb.ChatUser{Username:userShip.FriendUsername}
+	err := chatService.SetChatUserAddFriend(user1,user2)
+	if err!= nil {
+		response.Result(response.ERROR, map[int]int{}, fmt.Sprintf("%v", err), c)
+	}else{
+		response.OkWithMessage("添加好友成功",c)
+	}
+}
+
+
+
 
 
 // 登陆后签发jwt
