@@ -17,7 +17,8 @@ import (
 //!+
 func main() {
 	//conn, err := net.Dial("tcp", "192.168.127.103:7001")
-	conn, err := net.Dial("tcp", "127.0.0.1:7009")
+	//conn, err := net.Dial("tcp", "127.0.0.1:7009")
+	conn, err := net.Dial("tcp", "47.98.141.227:7009")
 	if err != nil {
 		log.Fatal(err)
 	}
