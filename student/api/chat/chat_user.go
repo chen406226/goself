@@ -105,7 +105,7 @@ func SearchUserByUserName(c *gin.Context) {
 	}
 }
 
-
+// 獲取朋友列表
 func GetUserFriendList(c *gin.Context)  {
 	var U request.ChatUserFriendStruct
 	c.ShouldBindJSON(&U)

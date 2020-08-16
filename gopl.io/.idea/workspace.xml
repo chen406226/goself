@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab46c13b-085d-4f3e-969a-b9ea9fa04080" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../face_recognition" beforeDir="false" afterPath="$PROJECT_DIR$/../face_recognition" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ch1/server3/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/ch1/server3/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +41,7 @@
     <property name="configurable.Module.GOPATH.is.expanded" value="true" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../student" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.40229884" />
@@ -195,10 +192,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="867" y="578" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1591170838490" />
-    <state x="966" y="344" key="FileChooserDialogImpl" timestamp="1593410885612">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="966" y="341" key="FileChooserDialogImpl" timestamp="1596806107111">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="966" y="344" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1593410885612" />
+    <state x="966" y="341" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1596806107111" />
     <state width="1394" height="160" key="GridCell.Tab.0.bottom" timestamp="1595924918828">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

@@ -20,7 +20,7 @@ func InitChatUserRouter(Router *gin.RouterGroup)  {
 	{
 		FilterUserRouter.POST("searchUserByUsername",chat.SearchUserByUserName)	// 搜索用户
 		FilterUserRouter.POST("chatUserAddFriend",chat.SetUserAddFriend)	// 添加好友
-		FilterUserRouter.POST("chatUserAddFriend",chat.GetUserFriendList)	// 获取朋友列表
+		FilterUserRouter.POST("getChatUserFriendList",chat.GetUserFriendList)	// 获取朋友列表
 		FilterUserRouter.POST("changePassword",)	// 修改密码
 		FilterUserRouter.POST("uploadHeaderImg",)	// 上传头像
 		FilterUserRouter.DELETE("deleteUser",)		// 删除用户
