@@ -3,7 +3,12 @@
   <component name="Go" enabled="true" />
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/chatgo/flutter_client/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/chatgo/flutter_client/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_chat/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter_chat/build" />
+    </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
