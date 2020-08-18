@@ -8,7 +8,6 @@ import (
 	"regexp"
 	"student/global"
 	chatService "student/service/chat"
-	"time"
 )
 
 //!+broadcaster
@@ -58,7 +57,7 @@ func broadcaster() {
 			// Broadcast incoming message to all
 			// clients' outgoing message channels.
 			//flysnowRegexp := regexp.MustCompile(`(.{15})\:\s?to\:\[([\d]{3})\](.*)`)
-			flysnowRegexp := regexp.MustCompile(`From\:(.{3})To\:(.{3})Room\:\[([\d]{4})\](.*)`)
+			flysnowRegexp := regexp.MustCompile(`From\:(.{36})To\:(.{36})Room\:\[([\d]{4})\](.*)`)
 			params := flysnowRegexp.FindStringSubmatch(msg)
 			if len(params) <1 {
 				break
@@ -125,10 +124,11 @@ func handleConn(conn net.Conn) {
 	var fromUser string
 	for input.Scan() {
 		if linked {
-			//messages <- who + ": " + input.Text()
-			t := time.Now()
-			tS := t.Format("2006-01-02 15:04:05")[5:]
-			messages <- tS + ": " + input.Text()
+			messages <- who + ": " + input.Text()
+			//t := time.Now()
+			//tS := t.Format("2006-01-02 15:04:05")[5:]
+			//fmt.Println(tS + ": " + input.Text())
+			//messages <- tS + ": " + input.Text()
 		} else {
 			flysnowRegexp := regexp.MustCompile(`From\:(.{36})To\:(.{36})Room\:\[([\d]{4})\](.*)`)
 			params := flysnowRegexp.FindStringSubmatch(input.Text())

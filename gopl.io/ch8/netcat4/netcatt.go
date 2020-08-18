@@ -17,8 +17,8 @@ import (
 //!+
 func main() {
 	//conn, err := net.Dial("tcp", "192.168.127.103:7001")
-	//conn, err := net.Dial("tcp", "127.0.0.1:7009")
-	conn, err := net.Dial("tcp", "47.98.141.227:7009")
+	conn, err := net.Dial("tcp", "127.0.0.1:7009")
+	//conn, err := net.Dial("tcp", "47.98.141.227:7009")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,7 +31,7 @@ func main() {
 		done <- struct{}{} // signal the main goroutine
 	}()
 	fmt.Println("jieshu")
-	mustCopys(conn, os.Stdin)
+	mustCopy(conn, os.Stdin)
 	conn.Close()
 	//写了会等待goroutine运行直到输出done 并且chan被赋值，不写主进程会直接中断，goroutine也中断不会输出done
 	<-done // wait for background goroutine to finish
@@ -39,7 +39,7 @@ func main() {
 
 //!-
 
-func mustCopys(dst io.Writer, src io.Reader) {
+func mustCopy(dst io.Writer, src io.Reader) {
 	if _, err := io.Copy(dst, src); err != nil {
 		log.Fatal(err)
 	}
