@@ -2,7 +2,6 @@ package base
 
 import (
 	"fmt"
-	"github.com/dchest/captcha"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis"
@@ -55,18 +54,18 @@ func Register(c *gin.Context) {
 func Login(c *gin.Context)  {
 	var L request.RegisterAndLoginStruct
 	_ = c.ShouldBindJSON(&L)
-	UserVerify := utils.Rules{
-		"Username":		{utils.NotEmpty()},
-		"Password":		{utils.NotEmpty()},
-		"CaptchaId":	{utils.NotEmpty()},
-		"Captcha":		{utils.NotEmpty()},
-	}
-	UserVerifyErr := utils.Verify(L, UserVerify)
-	if UserVerifyErr != nil {
-		response.FailWithMessage(UserVerifyErr.Error(), c)
-		return
-	}
-	if captcha.VerifyString(L.CaptchaId, L.Captcha) {
+	//UserVerify := utils.Rules{
+	//	"Username":		{utils.NotEmpty()},
+	//	"Password":		{utils.NotEmpty()},
+	//	"CaptchaId":	{utils.NotEmpty()},
+	//	"Captcha":		{utils.NotEmpty()},
+	//}
+	//UserVerifyErr := utils.Verify(L, UserVerify)
+	//if UserVerifyErr != nil {
+	//	response.FailWithMessage(UserVerifyErr.Error(), c)
+	//	return
+	//}
+	//if captcha.VerifyString(L.CaptchaId, L.Captcha) {
 		U := &mysqlDb.SysUser{Username:L.Username,Password:L.Password}
 		if err, user := service.Login(U);err != nil {
 			response.FailWithMessage(fmt.Sprintf("用户密码错误或%v",err),c)
@@ -74,9 +73,9 @@ func Login(c *gin.Context)  {
 			fmt.Println(user)
 			tokenNext(c, *user)
 		}
-	} else {
-		response.FailWithMessage("验证码错误", c)
-	}
+	//} else {
+	//	response.FailWithMessage("验证码错误", c)
+	//}
 
 
 }

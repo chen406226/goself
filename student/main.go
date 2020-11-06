@@ -20,12 +20,8 @@ func main() {
 			initialize.Mysql()
 	}
 	initialize.DBTables()
-	go start.RunChatServer()
+	//go start.RunChatServer()
 	defer global.GL_DB.Close()
-
-
-
-
 
 
 	// end
