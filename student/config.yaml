@@ -1,18 +1,12 @@
 # mysql connect configuration
 mysql:
   username: root
-<<<<<<< HEAD
-#  password: "123456"
-  password: "OmLgjkxS9l(6Ck"
-#  path: "127.0.0.1:3306"
-  path: "47.98.141.227:3306"
-  db-name: "qmPlu"
-=======
   password: "123456"
 #  password: "OmLgjkxS9l(6Ck"
   path: "127.0.0.1:3306"
+#  path: "47.98.141.227:3306"
   db-name: "qmplu"
->>>>>>> 3a7d52226fd12e958bf03fa89e3c2b61d7bb8c31
+#  db-name: "qmPlu"
   config: "charset=utf8&parseTime=True&loc=Local"
   max-idle-conns: 10
   max-open-conns: 10
@@ -27,7 +21,7 @@ redis:
 # system configuration
 system:
   use-multipoint: false
-  env: 'public'  # Change to "develop" to skip authentication for development mode or "public"
+  env: 'develop'  # Change to "develop" to skip authentication for development mode or "public"
   addr: 8889
   db-type: "mysql" #support mysql/sqlite
 

@@ -5,7 +5,7 @@ import (
 )
 
 type SysMenusResponse struct {
-	Menus []mysqlDb.SysBaseMenu `json:"menus"`
+	Menus []mysqlDb.SysMenu `json:"menus"`
 }
 
 type SysBaseMenusResponse struct {

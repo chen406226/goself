@@ -163,3 +163,34 @@ func compare(value interface{}, VerifyStr string) bool {
 		return false
 	}
 }
+
+
+// 小于入参(<) 如果为string array Slice则为长度比较 如果是 int uint float 则为数值比较
+func Lt(mark string) string {
+	return "lt=" + mark
+}
+
+// 小于等于入参(<=) 如果为string array Slice则为长度比较 如果是 int uint float 则为数值比较
+func Le(mark string) string {
+	return "le=" + mark
+}
+
+// 等于入参(==) 如果为string array Slice则为长度比较 如果是 int uint float 则为数值比较
+func Eq(mark string) string {
+	return "eq=" + mark
+}
+
+// 不等于入参(!=)  如果为string array Slice则为长度比较 如果是 int uint float 则为数值比较
+func Ne(mark string) string {
+	return "ne=" + mark
+}
+
+// 大于等于入参(>=) 如果为string array Slice则为长度比较 如果是 int uint float 则为数值比较
+func Ge(mark string) string {
+	return "ge=" + mark
+}
+
+// 大于入参(>) 如果为string array Slice则为长度比较 如果是 int uint float 则为数值比较
+func Gt(mark string) string {
+	return "gt=" + mark
+}
