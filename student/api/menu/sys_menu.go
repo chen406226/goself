@@ -152,29 +152,115 @@ func UpdateBaseMenu(c *gin.Context)  {
 
 }
 
+// @Tags menu
+// @Summary 删除菜单
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.GetById true "删除菜单"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /menu/deleteBaseMenu [post]
+func DeleteBaseMenu(c *gin.Context)  {
+	var idInfo request.GetById
+	_ = c.ShouldBindJSON(&idInfo)
+	IdVerifyErr := utils.Verify(idInfo, utils.CustomizeMap["IdVerify"])
+	if IdVerifyErr != nil {
+		response.FailWithMessage(IdVerifyErr.Error(), c)
+		return
+	}
+	err := service.DeleteBaseMenu(idInfo.Id)
+	if err != nil {
+		response.FailWithMessage(fmt.Sprintf("删除失败：%v",err),c)
+	} else {
+		response.OkWithMessage("删除成功", c)
+	}
+}
 
 
+// @Tags menu
+// @Summary 根据id获取菜单
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.GetById true "根据id获取菜单"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /menu/getBaseMenuById [post]
+func GetBaseMenuById(c *gin.Context)  {
+	var idInfo request.GetById
+	_ = c.ShouldBindJSON(&idInfo)
+	MenuVerify := utils.Rules{
+		"Id":{"notEmpty"},
+	}
+	MenuVerifyErr := utils.Verify(idInfo,MenuVerify)
+	if MenuVerifyErr != nil {
+		response.FailWithMessage(MenuVerifyErr.Error(),c)
+		return
+	}
+	err, menu := service.GetBaseMenuById(idInfo.Id)
+	if err != nil {
+		response.FailWithMessage(fmt.Sprintf("查询失败：%v",err),c)
+	} else {
+		response.OkWithData(resp.SysBaseMenuResponse{
+			Menu: menu,
+		},c)
+	}
+}
 
+// @Tags authorityAndMenu
+// @Summary 获取指定角色menu
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.AuthorityIdInfo true "增加menu和角色关联关系"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /menu/GetMenuAuthority [post]
+func GetMenuAuthority(c *gin.Context)  {
+	var authorityIdInfo request.AuthorityIdInfo
+	_ = c.ShouldBindJSON(&authorityIdInfo)
+	MenuVerify := utils.Rules{
+		"AuthorityId":{"notEmpty"},
+	}
+	MenuVerifyErr := utils.Verify(authorityIdInfo,MenuVerify)
+	if MenuVerifyErr != nil {
+		response.FailWithMessage(MenuVerifyErr.Error(), c)
+		return
+	}
+	err, menus := service.GetMenuAuthority(authorityIdInfo.AuthorityId)
+	if err != nil {
+		response.FailWithDetailed(response.ERROR,resp.SysMenusResponse{Menus: menus},fmt.Sprintf("添加失败,%v",err),c)
+	} else {
+		response.Result(response.SUCCESS, gin.H{"menus":menus},"获取成功",c)
+	}
 
+}
 
+// @Tags authorityAndMenu
+// @Summary 增加menu和角色关联关系
+// @Security ApiKeyAuth
+// @accept application/json
+// @Produce application/json
+// @Param data body request.AddMenuAuthorityInfo true "增加menu和角色关联关系"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"获取成功"}"
+// @Router /menu/addMenuAuthority [post]
+func AddMenuAuthority(c *gin.Context)  {
+	var addMenuAuthorityInfo request.AddMenuAuthorityInfo
+	_ = c.ShouldBindJSON(&addMenuAuthorityInfo)
+	MenuVerify := utils.Rules{
+		"AuthorityId":{"notEmpty"},
+	}
+	MenuVerifyErr := utils.Verify(addMenuAuthorityInfo,MenuVerify)
+	if MenuVerifyErr != nil {
+		response.FailWithMessage(MenuVerifyErr.Error(),c)
+		return
+	}
+	err := service.AddMenuAuthority(addMenuAuthorityInfo.Menus,addMenuAuthorityInfo.AuthorityId)
+	if err != nil {
+		response.FailWithMessage(fmt.Sprintf("添加失败，%v",err),c)
+	} else {
+		response.OkWithMessage("添加成功",c)
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 

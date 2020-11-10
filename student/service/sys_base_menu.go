@@ -57,7 +57,14 @@ func GetBaseMenuById(id float64) (err error,menu mysqlDb.SysBaseMenu) {
 func DeleteBaseMenu(id float64) (err error) {
 	err = global.GL_DB.Preload("Parameters").Where("parent_id = ?",id).First(&mysqlDb.SysBaseMenu{}).Error
 	if err != nil{
-
+		var menu mysqlDb.SysBaseMenu
+		db := global.GL_DB.Preload("SysAuthoritys").Where("id = ?",id).First(&menu).Delete(&menu)
+		err = global.GL_DB.Delete(&mysqlDb.SysBaseMenuParameter{},"sys_base_menu_id = ?",id).Error
+		if len(menu.SysAuthoritys) >0 {
+			err = global.GL_DB.Model(&menu).Association("SysAuthoritys").Delete(&menu.SysAuthoritys).Error
+		} else {
+			err = db.Error
+		}
 	} else {
 		return errors.New("此菜单存在子菜单不可删除")
 	}
