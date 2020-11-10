@@ -14,5 +14,24 @@ import (
 func SetMenuAuthority(auth *mysqlDb.SysAuthority) error {
 	var s mysqlDb.SysAuthority
 	global.GL_DB.Preload("SysBaseMenus").First(&s,"authority_id = ?",auth.AuthorityId)
-	err := global.GL_DB.Model(&s).
+	err := global.GL_DB.Model(&s).Association("SysBaseMenus").Replace(&auth.SysBaseMenus).Error
+	return err
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
