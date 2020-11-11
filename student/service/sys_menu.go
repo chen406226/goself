@@ -123,6 +123,21 @@ func getBaseMenuTreeMap() (err error, treeMap map[string][]mysqlDb.SysBaseMenu) 
 	return err, treeMap
 }
 
+// @title    GetBaseMenuTree
+// @description   获取基础路由树
+// @auth                     （2020/04/05  20:22）
+// @return    err              error
+// @return    menus            []SysBaseMenu
+
+func GetBaseMenuTree() (err error,menus []mysqlDb.SysBaseMenu) {
+	err,treeMap := getBaseMenuTreeMap()
+	menus = treeMap["0"]
+	for i := 0; i < len(menus); i++ {
+		err = getBaseChildrenList(&menus[i],treeMap)
+	}
+	return err,menus
+}
+
 // @title    GetMenuAuthority
 // @description   查看当前角色树
 // @auth                     （2020/04/05  20:22）

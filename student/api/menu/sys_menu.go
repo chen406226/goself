@@ -152,6 +152,24 @@ func UpdateBaseMenu(c *gin.Context)  {
 
 }
 
+// @Tags authorityAndMenu
+// @Summary 获取用户动态路由
+// @Security ApiKeyAuth
+// @Produce  application/json
+// @Param data body request.RegisterAndLoginStruct true "可以什么都不填"
+// @Success 200 {string} string "{"success":true,"data":{},"msg":"返回成功"}"
+// @Router /menu/getBaseMenuTree [post]
+func GetBaseMenuTree(c *gin.Context)  {
+	err, menus := service.GetBaseMenuTree()
+	if err != nil {
+		response.FailWithMessage(fmt.Sprintf("获取失败，%v",err), c)
+	} else {
+		response.OkWithData(resp.SysBaseMenusResponse{
+			Menus: menus,
+		},c)
+	}
+}
+
 // @Tags menu
 // @Summary 删除菜单
 // @Security ApiKeyAuth
