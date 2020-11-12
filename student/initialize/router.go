@@ -22,6 +22,7 @@ func Router() *gin.Engine {
 	router.InitChatUserRouter(ApiGroup)						// 聊天用户
 	router.InitChatSysNoticeRouter(ApiGroup)						// 聊天系统推送
 	router.InitMenuRouter(ApiGroup)                  // 注册menu路由
+	router.InitAuthorityRouter(ApiGroup)                  // 注册authority路由
 	global.GL_LOG.Info("router register success")
 	return Router
 }

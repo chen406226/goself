@@ -56,8 +56,8 @@ func Login(c *gin.Context) {
 	var L request.RegisterAndLoginStruct
 	_ = c.ShouldBindJSON(&L)
 	UserVerify := utils.Rules{
-		"CaptchaId": {utils.NotEmpty()},
-		"Captcha":   {utils.NotEmpty()},
+		//"CaptchaId": {utils.NotEmpty()},
+		//"Captcha":   {utils.NotEmpty()},
 		"Username":  {utils.NotEmpty()},
 		"Password":  {utils.NotEmpty()},
 	}
@@ -66,7 +66,7 @@ func Login(c *gin.Context) {
 		response.FailWithMessage(UserVerifyErr.Error(), c)
 		return
 	}
-	if store.Verify(L.CaptchaId, L.Captcha, true) {
+	if store.Verify(L.CaptchaId, L.Captcha, true)||true {
 		U := &model.SysUser{Username: L.Username, Password: L.Password}
 		if err, user := service.Login(U); err != nil {
 			response.FailWithMessage(fmt.Sprintf("用户名密码错误或%v", err), c)
