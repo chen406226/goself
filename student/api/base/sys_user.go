@@ -30,6 +30,8 @@ func Register(c *gin.Context) {
 	UserVerify := utils.Rules{
 		"Username":    {utils.NotEmpty()},
 		"Password":    {utils.NotEmpty()},
+		//"NickName":    {utils.NotEmpty()},
+		//"AuthorityId": {utils.NotEmpty()},
 	}
 	UserVerifyErr := utils.Verify(R, UserVerify)
 	if UserVerifyErr != nil {
