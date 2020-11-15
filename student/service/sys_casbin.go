@@ -1,11 +1,17 @@
 package service
 
 import (
-	"github.com/casbin/casbin"
+	"errors"
 	"github.com/casbin/casbin/util"
-	gormadapter "github.com/casbin/gorm-adapter"
+	gormadapter "github.com/casbin/gorm-adapter/v3"
+	//"github.com/casbin/casbin"
+	"github.com/casbin/casbin/v2"
+	_ "github.com/go-sql-driver/mysql"
+	//gormadapter "github.com/casbin/gorm-adapter"
 	"strings"
 	"student/global"
+	"student/model/mysqlDb"
+	"student/model/request"
 )
 
 // @title    Casbin
@@ -13,8 +19,10 @@ import (
 // @auth                     （2020/04/05  20:22）
 
 func Casbin() *casbin.Enforcer {
-	a := gormadapter.NewAdapterByDB(global.GL_DB)
-	e := casbin.NewEnforcer(global.GL_CONFIG.Casbin.ModelPath,a)
+	admin := global.GL_CONFIG.Mysql
+	a, _ := gormadapter.NewAdapter(global.GL_CONFIG.System.DbType, admin.Username+":"+admin.Password+"@("+admin.Path+")/"+admin.Dbname, true)
+	//a := gormadapter.NewAdapterByDB(global.GL_DB)
+	e, _ := casbin.NewEnforcer(global.GL_CONFIG.Casbin.ModelPath,a)
 	e.AddFunction("ParamsMatch", ParamsMatchFunc)
 	_ = e.LoadPolicy()
 	return e
@@ -47,3 +55,71 @@ func ParamsMatchFunc(args ...interface{}) (interface{}, error) {
 
 	return (bool)(ParamsMatch(name1, name2)), nil
 }
+
+// @title    GetPolicyPathByAuthorityId
+// @description   get policy path by authorityId, 获取权限列表
+// @auth                     （2020/04/05  20:22）
+// @param     authorityId     string
+// @return                    []string
+func GetPolicyPathByAuthorityId(authorityId string) (pathMaps []request.CasbinInfo) {
+	e := Casbin()
+	list := e.GetFilteredPolicy(0,authorityId)
+	for _, v := range list {
+		pathMaps = append(pathMaps,request.CasbinInfo{
+			Path:   v[1],
+			Method: v[2],
+		})
+	}
+	return  pathMaps
+}
+
+// @title    UpdateCasbin
+// @description   update casbin authority, 更新casbin权限
+// @auth                     （2020/04/05  20:22）
+// @param     authorityId      string
+// @param     casbinInfos      []CasbinInfo
+// @return                     error
+
+func UpdateCasbin(authorityId string,casbinInfos []request.CasbinInfo) error {
+	ClearCasbin(0,authorityId)
+	var rules [][]string
+	for _, v := range casbinInfos {
+		cm := mysqlDb.CasbinModel{
+			Ptype:       "p",
+			AuthorityId: authorityId,
+			Path:        v.Path,
+			Method:      v.Method,
+		}
+		rules = append(rules,[]string{cm.AuthorityId, cm.Path,cm.Method})
+	}
+	e := Casbin()
+	success,_ := e.AddPolicies(rules)
+	if success == false {
+		return errors.New("存在相同api,添加失败，请联系管理员")
+	}
+	return nil
+}
+
+// @title    ClearCasbin
+// @description   清除匹配的权限
+// @auth                     （2020/04/05  20:22）
+// @param     v               int
+// @param     p               string
+// @return                    bool
+
+func ClearCasbin(v int, p ...string) bool {
+	e := Casbin()
+	success,_ := e.RemoveFilteredPolicy(v, p...)
+	return success
+
+}
+
+
+
+
+
+
+
+
+
+

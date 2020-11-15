@@ -21,6 +21,7 @@ gopl.io/.idea
 .idea
 .dart_tool
 .vscode
+*.exe
 *.suo
 *.ntvs*
 *.njsproj
@@ -31,3 +32,4 @@ gopl.io/.idea
 .history/
 package-lock.json
 *.log
+latest_log
