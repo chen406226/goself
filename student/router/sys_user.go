@@ -10,8 +10,9 @@ import (
 func InitUserRouter(Router *gin.RouterGroup)  {
 	UserRouter := Router.Group("user").
 		Use(middleware.JWTAuth()).
-		Use(middleware.CasbinHandler()).
-		Use(middleware.OperationRecord())
+		Use(middleware.CasbinHandler())
+	//.
+	//	Use(middleware.OperationRecord())
 	fmt.Sprintf("dfs")
 	{
 		UserRouter.POST("register", base.Register)  							// 注册后台用户

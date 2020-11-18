@@ -11,7 +11,7 @@ type SysUser struct {
 	Username    string       `json:"userName"`
 	Password    string       `json:"-"`
 	NickName    string       `json:"nickName" gorm:"default:'QMPlusUser'"`
-	HeaderImg   string       `json:"headerImg" gorm:"default:'http://www.henrongyi.top/avatar/lufu.jpg'"`
+	HeaderImg   string       `json:"headerImg" gorm:"default:'http://qmplusimg.henrongyi.top/1571627762timg.jpg'"`
 	Authority   SysAuthority `json:"authority" gorm:"ForeignKey:AuthorityId;AssociationForeignKey:AuthorityId"`
 	AuthorityId string       `json:"authorityId" gorm:"default:888"`
 }
