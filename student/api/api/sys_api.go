@@ -142,7 +142,7 @@ func GetApiList(c *gin.Context)  {
 		response.FailWithMessage(PageVerifyErr.Error(),c)
 		return
 	}
-	err, list, total := service.GetApiList(sp.SysApi,sp.PageInfo,sp.OrderKey,sp.Desc)
+	err, list, total := service.GetAPIInfoList(sp.SysApi,sp.PageInfo,sp.OrderKey,sp.Desc)
 	if err != nil {
 		response.FailWithMessage( fmt.Sprintf("获取api列表失败，%v",err),c)
 	} else {

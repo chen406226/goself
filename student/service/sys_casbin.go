@@ -114,9 +114,21 @@ func ClearCasbin(v int, p ...string) bool {
 
 }
 
+// @title    UpdateCasbinApi
+// @description   update casbin apis, API更新随动
+// @auth                     （2020/04/05  20:22）
+// @param     oldPath          string
+// @param     newPath          string
+// @param     oldMethod        string
+// @param     newMethod        string
+// @return                     error
 
-
-
+func UpdateCasbinApi(oldPath string,newPath string,oldMethod string,newMethod string) error {
+	err := global.GL_DB.Table("casbin_rule").Model(&mysqlDb.CasbinModel{}).
+		Where("v1 = ? AND v2 =?",oldPath,oldMethod).
+		Updates(map[string]interface{}{"v1": newPath,"v2": newMethod}).Error
+	return err
+}
 
 
 
