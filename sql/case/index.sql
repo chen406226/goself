@@ -40,16 +40,39 @@ $ EXPLAIN select * from class left join book on book.card = class.card
 好 create index card_book on book(card)
 drop indtx card_book on book
 create index card_book on class(card)
+*/
+/*
+三表
+加上上面的两个表
+*/
+CREATE TABLE `phone` (
+  `phoneid` int(11) NOT NULL AUTO_INCREMENT,
+  `card` int(255) NOT NULL,
+  PRIMARY KEY (`phoneid`),
+  UNIQUE KEY `phoneid` (`phoneid`,`card`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/*
+using join buffer
+SELECT * from class inner JOIN book ON class.card=book.card inner JOIN phone on book.card = phone.card
+如果用leftjoin   row全选all
+ALTER TABLE `book` add INDEX Y (`card`)
+ALTER TABLE `phone` add INDEX Y (`card`)
+三表都是右 边 两个  加index
 */
 
+/*索引失效
+*/
+CREATE TABLE `staffs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(255) NOT NULL,
+  `age` int(11) NOT NULL DEFAULT '0',
+  `pos` varchar(255) NOT NULL,
+  `add_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '入职时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-
-
-
-
+alter table staffs add index idx_staffsnameAgePos(name,age,pos)
 
 
 
