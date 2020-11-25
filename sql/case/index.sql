@@ -74,6 +74,109 @@ CREATE TABLE `staffs` (
 
 alter table staffs add index idx_staffsnameAgePos(name,age,pos)
 
+/*test 03
+*/
+
+CREATE TABLE `test03` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `c1` char(10) DEFAULT NULL,
+  `c2` char(255) DEFAULT NULL,
+  `c3` varchar(255) DEFAULT NULL,
+  `c4` varchar(255) DEFAULT NULL,
+  `c5` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+/*create index idx_test3_c1234 on test03(c1,c2,c3,c4)
+
+explain select * from test03 where c1='a1' and c2='a2' and c3>'a3' and c4='a4'
+type range  ref null 前两个用到了，范围之后全是小
+explain select * from test03 where c1='a1' and c2='a2'  and c4>'a4' and c3='a3'
+用到4个， 看key_len 
+explain select * from test03 where c1='a1' and c2='a2'  and c4='a4' order by c3
+用到2个  type ref  ref,2个const
+explain select * from test03 where c1='a1' and c2='a2'  order by c3
+同上
+explain select * from test03 where c1='a1' and c2='a2'  order by c4
+同上但是using filesort
+explain select * from test03 where c1='a1' and c5='a5'  order by c2,c3
+1个 type ref  ref  const 只有c1一个字段索引，但c2,c3用于排序无filesort
+explain select * from test03 where c1='a1' and c5='a5'  order by c3,c2
+1个 type ref  ref  const 只有c1一个字段索引， $$$有 filesort
+order by 要按顺序来
+explain select * from test03 where c1='a1' and c2='a2'  order by c2,c3
+ref 2ge const 
+explain select * from test03 where c1='a1' and c2='a2' and c5='a5' order by c2,c3
+同上 c1,c2 两个引用，c2,c3用于排序无filesort
+explain select * from test03 where c1='a1' and c2='a2' and c5='a5' order by c3,c2
+??????????? 没有filesort ?因为有c2提前用了 a2变成const了不用排序了
+?????????
+group by
+explain select * from test03 where c1='a1' and c4='a4' group by c2,c3
+1 个 ref
+explain select * from test03 where c1='a1' and c4='a4' group by c3,c2
+ref key 但是Using where; Using temporary; Using filesort
+
+
+定值，范围还是排序，一般orderby是给个范围
+group by 基本上都需要进行排序，如果错乱，会有临时表产生
+分组之前必排序group by 和order by基本一致 group by 有having
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
