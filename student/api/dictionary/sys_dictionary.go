@@ -12,5 +12,5 @@ import "github.com/gin-gonic/gin"
 // @Router /sysDictionary/createSysDictionary [post]
 
 func CreateSysDictionary(c *gin.Context)  {
-	var sysDictionary mysqlDb
+	var sysDictionary mysqlDb是飞洒
 }
