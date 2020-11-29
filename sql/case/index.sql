@@ -123,14 +123,41 @@ group by 基本上都需要进行排序，如果错乱，会有临时表产生
 分组之前必排序group by 和order by基本一致 group by 有having
 */
 
+/* order by
+*/
+CREATE TABLE `tbla` (
+  `id` int(11) NOT NULL,
+  `age` int(11) DEFAULT NULL,
+  `birth` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+create index idx_a_ageBir on tblA(age,birth)
 
+/*
+EXPLAIN SELECT * FROM `tblA` where age >3 order by age;
+覆盖索引  不会filesort
+EXPLAIN SELECT * FROM `tblA` where age >3 order by age,birth;
+不会filesort
+EXPLAIN SELECT * FROM `tblA` where age >3 order by birth;
+有filesort  带头大哥不在 变成范围了 
+EXPLAIN SELECT * FROM `tblA` where age >3 order by birth,age;
+有filesort  orderby后面不是whrer后面不自动优化
+EXPLAIN SELECT * FROM `tblA` order by birth;
+有filesort
+EXPLAIN SELECT * FROM `tblA` where birth >'2016-01-01 11:11:11' order by birth;
+有filesort
+EXPLAIN SELECT * FROM `tblA` where birth >'2016-01-01 11:11:11' order by age;
+没有filesort 用到index
+EXPLAIN SELECT * FROM `tblA` order by age asc,birth desc;
+有filesort  索引顺序用不上
+EXPLAIN SELECT * FROM `tblA` order by age desc,birth desc;
+没有
 
-
-
-
-
-
+*/
+/*
+大数据
+*/
 
 
 
