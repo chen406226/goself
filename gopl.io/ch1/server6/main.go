@@ -8,8 +8,10 @@ package main
 
 import (
     "encoding/json"
+    "fyne.io/fyne/v2"
     "fyne.io/fyne/v2/app"
     "fyne.io/fyne/v2/container"
+    "fyne.io/fyne/v2/theme"
     "fyne.io/fyne/v2/widget"
     "io/ioutil"
     "log"
@@ -24,12 +26,13 @@ var proxyHost = "http://localhost:8088"
 
 func main() {
     a := app.New()
-    w := a.NewWindow("Hello")
+    a.SetIcon(theme.FyneLogo())
+    w := a.NewWindow("前端换源工具")
 
     hello := widget.NewLabel("Hello Fyne!")
     w.SetContent(container.NewVBox(
         hello,
-        widget.NewButton("Hi!", func() {
+        widget.NewButton("启动", func() {
             hello.SetText("Welcome :)")
         }),
     ))
@@ -42,6 +45,9 @@ func main() {
 
 type Config struct {
     Name   string  `json:"name"`
+}
+func FyneLogo() fyne.Resource {
+    return fynelogo
 }
 
 var configPath = "./config.json"
