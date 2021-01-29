@@ -1,7 +1,6 @@
 package tutorials
 
 import (
-	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
@@ -22,16 +21,17 @@ func parseURL(urlStr string) *url.URL {
 func welcomeScreen(_ fyne.Window) fyne.CanvasObject {
 	logo := canvas.NewImageFromResource(data.FyneScene)
 	logo.FillMode = canvas.ImageFillContain
-	fmt.Println("sdlkfj")
 	if fyne.CurrentDevice().IsMobile() {
-		logo.SetMinSize(fyne.NewSize(171, 125))
+		logo.SetMinSize(fyne.NewSize(540, 480))
 	} else {
-		logo.SetMinSize(fyne.NewSize(228, 167))
+		logo.SetMinSize(fyne.NewSize(540, 480))
 	}
-
+	//data.BundleFile("fynescenedark", "dark.jpg")
+	//data.BundleFile("fynescenelight", "light.jpg")
+	runName := "Server Provider: " + data.RunName
 
 	return container.NewCenter(container.NewVBox(
-		widget.NewLabelWithStyle("", fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
+		widget.NewLabelWithStyle(runName, fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
 		logo,
 	))
 }

@@ -2,8 +2,6 @@ package tutorials
 
 import (
 	"fyne.io/fyne/v2"
-	"gopl.io/ch1/proxy/data"
-	"time"
 )
 
 // Tutorial defines the data structure for a tutorial
@@ -12,23 +10,23 @@ type Tutorial struct {
 	View         func(w fyne.Window) fyne.CanvasObject
 }
 
-func init() {
-	time.Sleep(time.Duration(2) * time.Second)
-	data.RunName = "hhhh"
-}
+//func init() {
+//	time.Sleep(time.Duration(2) * time.Second)
+//	data.RunName = "hhhh"
+//}
 
 var (
 	// Tutorials defines the metadata for each tutorial
 	Tutorials = map[string]Tutorial{
 		"welcome": {"Home", "", welcomeScreen},
+		"binding": {"Add Web Server",
+			"Don't Input Chinese",
+			bindingScreen},
 		"animations": {"Animations",
 			"See how to animate components.",
 			makeAnimationScreen,
 		},
-		"icons": {"Theme Icons",
-			"Browse the embedded icons.",
-			iconScreen,
-		},
+
 		"containers": {"Containers",
 			"Containers group other widgets and canvas objects, organising according to their layout.\n" +
 				"Standard containers are illustrated in this section, but developers can also provide custom " +
@@ -126,13 +124,10 @@ var (
 			"Work with dialogs.",
 			dialogScreen,
 		},
-		"windows": {"Windows",
-			"Window function demo.",
+		"windows": {"Change Server Provider",
+			"Select a Provider and Click Run",
 			windowScreen,
 		},
-		"binding": {"Add Web Server",
-			"",
-			bindingScreen},
 		"advanced": {"Advanced",
 			"Debug and advanced information.",
 			advancedScreen,
@@ -141,7 +136,7 @@ var (
 
 	// TutorialIndex  defines how our tutorials should be laid out in the index tree
 	TutorialIndex = map[string][]string{
-		"":            {"welcome", "animations", "icons", "widgets", "collections", "containers", "dialogs", "windows", "binding", "advanced"},
+		"":            {"welcome", "windows", "binding"},
 		"collections": {"list", "table", "tree"},
 		"containers":  {"apptabs", "border", "box", "center", "grid", "split", "scroll"},
 		"widgets":     {"accordion", "button", "card", "entry", "form", "input", "text", "toolbar", "progress"},

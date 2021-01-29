@@ -8,7 +8,12 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
+	"gopl.io/ch1/proxy/data"
 	"gopl.io/ch1/proxy/tutorials"
+	"log"
+	"net/http"
+	"net/http/httputil"
+	"net/url"
 )
 
 const preferenceCurrentTutorial = "currentTutorial"
@@ -65,8 +70,30 @@ func main() {
 		split.Offset = 0.2
 		w.SetContent(split)
 	}
+	go runProxy()
 	w.Resize(fyne.NewSize(640, 460))
 	w.ShowAndRun()
+}
+
+func runProxy()  {
+	http.HandleFunc("/", handler)
+	log.Fatal(http.ListenAndServe("0.0.0.0:9876", nil))
+}
+func handler(w http.ResponseWriter, r *http.Request) {
+	var proxyHost = "http://localhost:8088"
+	for _, v := range data.CashData.ProviderList {
+		if  v.Name == data.RunName {
+			proxyHost = v.Host
+		}
+	}
+	//fmt.Println(proxyHost)
+	remote, err := url.Parse(proxyHost)
+	if err != nil {
+		panic(err)
+	}
+	r.Host = "localhost:8080"
+	proxy := httputil.NewSingleHostReverseProxy(remote)
+	proxy.ServeHTTP(w, r)
 }
 
 func makeNav(setTutorial func(tutorial tutorials.Tutorial), loadPrevious bool) fyne.CanvasObject {

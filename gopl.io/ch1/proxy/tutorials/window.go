@@ -1,25 +1,30 @@
 package tutorials
 
 import (
-	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
+	"gopl.io/ch1/proxy/data"
 )
 
 func windowScreen(_ fyne.Window) fyne.CanvasObject {
-	selectV := widget.NewSelect([]string{"Option 1", "Option 2", "Option 3"},
+	var selectList []string
+	for _, v := range data.CashData.ProviderList {
+		selectList = append(selectList, v.Name)
+	}
+	selectV := widget.NewSelect(selectList,
 		func(s string) {
-			fmt.Println("selected", s)
+
 		},
 	)
-	selectV.Selected = "Option 1"
+	selectV.Selected = data.RunName
 	return container.NewVBox(
 		selectV,
 		widget.NewButton("Run",
 			func() {
-				fmt.Println("tapped text button ")
-				fmt.Println(selectV.Selected)
+				data.RunName = selectV.Selected
+				data.CashData.Default = selectV.Selected
+				data.SaveDefault()
 			},
 		),
 	)
