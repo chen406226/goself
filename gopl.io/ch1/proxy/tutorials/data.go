@@ -26,7 +26,10 @@ var (
 			"See how to animate components.",
 			makeAnimationScreen,
 		},
-
+		"webBuild": {"Web Auto Publish",
+			"Please select the project root file address",
+			webBuild,
+		},
 		"containers": {"Containers",
 			"Containers group other widgets and canvas objects, organising according to their layout.\n" +
 				"Standard containers are illustrated in this section, but developers can also provide custom " +
@@ -136,7 +139,7 @@ var (
 
 	// TutorialIndex  defines how our tutorials should be laid out in the index tree
 	TutorialIndex = map[string][]string{
-		"":            {"welcome", "windows", "binding"},
+		"":            {"welcome", "windows", "binding", "webBuild"},
 		"collections": {"list", "table", "tree"},
 		"containers":  {"apptabs", "border", "box", "center", "grid", "split", "scroll"},
 		"widgets":     {"accordion", "button", "card", "entry", "form", "input", "text", "toolbar", "progress"},

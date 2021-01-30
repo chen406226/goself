@@ -5,11 +5,12 @@ import (
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/data/binding"
 	"fyne.io/fyne/v2/data/validation"
+	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 	"gopl.io/ch1/proxy/data"
 )
 
-func bindingScreen(_ fyne.Window) fyne.CanvasObject {
+func bindingScreen(win fyne.Window) fyne.CanvasObject {
 
 	//formStruct := struct {
 	//	Name, Email string
@@ -45,6 +46,7 @@ func bindingScreen(_ fyne.Window) fyne.CanvasObject {
 		OnSubmit: func() {
 			data.CashData.ProviderList = append(data.CashData.ProviderList, data.User{Name: name.Text, Host: host.Text})
 			data.SaveDefault()
+			dialog.ShowInformation("Information", "Save Server Provider Succeeded", win)
 			//fyne.CurrentApp().SendNotification(&fyne.Notification{
 			//	Title:   "Form for: " + name.Text,
 			//	Content: largeText.Text,

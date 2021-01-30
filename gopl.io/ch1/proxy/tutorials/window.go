@@ -3,11 +3,13 @@ package tutorials
 import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 	"gopl.io/ch1/proxy/data"
 )
 
-func windowScreen(_ fyne.Window) fyne.CanvasObject {
+func windowScreen(win fyne.Window) fyne.CanvasObject {
+
 	var selectList []string
 	for _, v := range data.CashData.ProviderList {
 		selectList = append(selectList, v.Name)
@@ -25,6 +27,7 @@ func windowScreen(_ fyne.Window) fyne.CanvasObject {
 				data.RunName = selectV.Selected
 				data.CashData.Default = selectV.Selected
 				data.SaveDefault()
+				dialog.ShowInformation("Information", "Switch Server Provider Succeeded", win)
 			},
 		),
 	)

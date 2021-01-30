@@ -2,13 +2,21 @@ package data
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/dialog"
 	"io/ioutil"
+	"os/exec"
+	"strings"
+	"time"
 )
 
 
 type Config struct {
 	ProviderList   	[]User  	`json:"providerList"`
-	Default					string							`json:"default"`
+	Default					string		`json:"default"`
+	SourceFolder		string		`json:"sourceFolder"`
 }
 
 type User struct {
@@ -26,8 +34,10 @@ var(
 			User{Name: "ZhangZeng",Host: "http://10.10.0.43:8088"},
 			User{Name: "HouZhiYong",Host: "http://10.10.0.76:8200"},
 		},
+		SourceFolder : "",
 	}
 	RunName = "Dev"
+	SourceFolder = ""
 )
 
 func init() {
@@ -35,6 +45,7 @@ func init() {
 	if con != nil {
 		CashData = con
 		RunName = CashData.Default
+		SourceFolder = CashData.SourceFolder
 	} else {
 		SaveConfig(CashData)
 	}
@@ -62,6 +73,31 @@ func SaveDefault()  {
 func GetDefault()  {
 
 }
+
+func FirstConnection()  {
+	cmd := exec.Command("cmd.exe", "/c", "mstsc /v: 10.10.0.123 /console")
+	cmd.Run()
+	cmd = exec.Command("cmd.exe", "/c", "net use \\\\10.10.0.123\\ipc$ Nc@test /user:Administrator")
+	cmd.Run()
+}
+
+func MoveFile(win fyne.Window)  {
+	t := strings.Replace(CashData.SourceFolder,"/","\\",100)
+	cmd := exec.Command("cmd.exe", "/c", "cd/d "+ CashData.SourceFolder +" && npm run build")
+	err := cmd.Run()
+	if err != nil {
+		dialog.NewError(errors.New("Pushlish Error"), win)
+	}
+	time.Sleep(time.Second * 2)
+	cmd = exec.Command("cmd.exe", "/c", "xcopy "+t+"\\dist \\\\10.10.0.123\\D\\public\\NcManageUI /s/e/y")
+	err = cmd.Run()
+	if err != nil {
+		dialog.NewError(errors.New("Pushlish Error"), win)
+	}
+	fmt.Println("cccccccccccc")
+	dialog.ShowInformation("Success", "Publish new Version Success", win)
+}
+
 
 func LoadConfig()(config *Config){
 	data,err:=ioutil.ReadFile(configPath)
