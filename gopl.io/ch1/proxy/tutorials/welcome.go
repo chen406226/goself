@@ -1,12 +1,14 @@
 package tutorials
 
 import (
+	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 	"gopl.io/ch1/proxy/data"
+	"image/color"
 	"net/url"
 )
 
@@ -64,9 +66,21 @@ func webBuild(win fyne.Window) fyne.CanvasObject {
 		},
 	)
 	selectV.Selected = "10.10.0.123"
+	infProgress := widget.NewProgressBarInfinite()
+	//lb := widget.NewLabel("Please Wait ,Building...")
+	lb := canvas.NewText("Please Wait Building...",color.RGBA{
+		R: 255,
+		G: 0,
+		B: 0,
+		A: 255,
+	})
+	lb.Hide()
+	infProgress.Hide()
 	return container.NewVBox(
+		lb,
+		infProgress,
 		selectV,
-		widget.NewButton("Folder Open", func() {
+		widget.NewButton("Change Project Folder", func() {
 			dialog.ShowFolderOpen(func(list fyne.ListableURI, err error) {
 				if err != nil {
 					dialog.ShowError(err, win)
@@ -75,7 +89,6 @@ func webBuild(win fyne.Window) fyne.CanvasObject {
 				if list == nil {
 					return
 				}
-
 				//children, err := list.List()
 				_, err = list.List()
 				if err != nil {
@@ -95,14 +108,26 @@ func webBuild(win fyne.Window) fyne.CanvasObject {
 				data.CashData.SourceFolder = data.SourceFolder
 				//data.SourceFolder = title2.Text()
 				data.SaveDefault()
-				data.MoveFile(win)
+				lb.Text="Please Wait ,Building..."
+				lb.Show()
+				infProgress.Show()
+				fmt.Println("HHHHHHHHH")
+				data.MoveFile(win, lb)
+				lb.Hide()
+				infProgress.Hide()
+				fmt.Println("TTTTTTTTTTTT")
 			},
 		),
 		EnpytT(1),
 		title,
 		widget.NewButton("Connect Teleservice",
 			func() {
-				data.FirstConnection()
+				lb.Text="Please Wait ,Linking..."
+				lb.Show()
+				infProgress.Show()
+				data.FirstConnection(win, lb)
+				lb.Hide()
+				infProgress.Hide()
 			},
 		),
 	)

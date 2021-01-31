@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/dialog"
 	"io/ioutil"
 	"os/exec"
@@ -74,27 +75,58 @@ func GetDefault()  {
 
 }
 
-func FirstConnection()  {
-	cmd := exec.Command("cmd.exe", "/c", "mstsc /v: 10.10.0.123 /console")
-	cmd.Run()
-	cmd = exec.Command("cmd.exe", "/c", "net use \\\\10.10.0.123\\ipc$ Nc@test /user:Administrator")
-	cmd.Run()
-}
-
-func MoveFile(win fyne.Window)  {
-	t := strings.Replace(CashData.SourceFolder,"/","\\",100)
-	cmd := exec.Command("cmd.exe", "/c", "cd/d "+ CashData.SourceFolder +" && npm run build")
+func FirstConnection(win fyne.Window, lb *canvas.Text)  {
+	lb.Text = "Connect Ip ..."
+	lb.Refresh()
+	cmd := exec.Command("cmd.exe", "/c", "ping 10.10.0.123")
 	err := cmd.Run()
 	if err != nil {
-		dialog.NewError(errors.New("Pushlish Error"), win)
+		dialog.ShowError(errors.New("IP Cannot Connect"), win)
+		return
 	}
-	time.Sleep(time.Second * 2)
-	cmd = exec.Command("cmd.exe", "/c", "xcopy "+t+"\\dist \\\\10.10.0.123\\D\\public\\NcManageUI /s/e/y")
+
+	lb.Text = "Login Teleservice ..."
+	lb.Refresh()
+	cmd = exec.Command("cmd.exe", "/c", "mstsc /v: 10.10.0.123 /console")
 	err = cmd.Run()
 	if err != nil {
-		dialog.NewError(errors.New("Pushlish Error"), win)
+		dialog.ShowError(errors.New("Connection Error"), win)
+		return
 	}
-	fmt.Println("cccccccccccc")
+	cmd = exec.Command("cmd.exe", "/c", "net use \\\\10.10.0.123\\ipc$ Nc@test /user:Administrator")
+	err = cmd.Run()
+	if err != nil {
+		dialog.ShowError(errors.New("Uesr Or PassWord Error"), win)
+	}
+}
+
+func MoveFile(win fyne.Window, lb *canvas.Text)  {
+	t := strings.Replace(CashData.SourceFolder,"/","\\",100)
+	lb.Text = "Build Project ..."
+	lb.Refresh()
+
+	//cmd := exec.Command("cmd.exe", "/c", "cd/d "+ CashData.SourceFolder +" && npm run build")
+	//err := cmd.Run()
+	//if err != nil {
+	//	fmt.Println("NNNNNN")
+	//
+	//	dialog.ShowError(errors.New("Build Error"), win)
+	//	return
+	//}
+	time.Sleep(time.Second *4)
+	fmt.Println("WWWWWWWWWWWW")
+	lb.Text = "Send File ..."
+	lb.Refresh()
+	time.Sleep(time.Second *4)
+
+	cmd := exec.Command("cmd.exe", "/c", "xcopy "+t+"\\dist \\\\10.10.0.123\\D\\public\\NcManageUI /s/e/y")
+	err := cmd.Run()
+	if err != nil {
+		fmt.Println("NNNNNNNNNNN")
+		dialog.ShowError(errors.New("Publish File Error,Please Try To Click 'Connect Teleservice' Or Check Your File Sharing Has Been Set Up"), win)
+		return
+	}
+	fmt.Println("WWWWWWW")
 	dialog.ShowInformation("Success", "Publish new Version Success", win)
 }
 

@@ -1,6 +1,7 @@
 package tutorials
 
 import (
+	"errors"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/data/binding"
@@ -44,6 +45,10 @@ func bindingScreen(win fyne.Window) fyne.CanvasObject {
 		//	fmt.Println("Cancelled")
 		//},
 		OnSubmit: func() {
+			if name.Text == "" {
+				dialog.ShowError(errors.New("Please Input Name"), win)
+				return
+			}
 			data.CashData.ProviderList = append(data.CashData.ProviderList, data.User{Name: name.Text, Host: host.Text})
 			data.SaveDefault()
 			dialog.ShowInformation("Information", "Save Server Provider Succeeded", win)

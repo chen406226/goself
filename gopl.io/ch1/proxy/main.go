@@ -29,7 +29,7 @@ func shortcutFocused(s fyne.Shortcut, w fyne.Window) {
 func main() {
 	a := app.NewWithID("io.fyne.demo")
 	a.SetIcon(theme.FyneLogo())
-	w := a.NewWindow("前端换源工具")
+	w := a.NewWindow("发布换源工具")
 	topWindow = w
 	mainMenu := fyne.NewMainMenu(
 		// a quit item will be appended to our first menu
