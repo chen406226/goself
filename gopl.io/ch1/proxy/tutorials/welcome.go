@@ -1,7 +1,6 @@
 package tutorials
 
 import (
-	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
@@ -111,11 +110,9 @@ func webBuild(win fyne.Window) fyne.CanvasObject {
 				lb.Text="Please Wait ,Building..."
 				lb.Show()
 				infProgress.Show()
-				fmt.Println("HHHHHHHHH")
 				data.MoveFile(win, lb)
 				lb.Hide()
 				infProgress.Hide()
-				fmt.Println("TTTTTTTTTTTT")
 			},
 		),
 		EnpytT(1),

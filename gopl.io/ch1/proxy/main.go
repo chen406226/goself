@@ -2,18 +2,21 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 	"gopl.io/ch1/proxy/data"
 	"gopl.io/ch1/proxy/tutorials"
-	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"time"
 )
 
 const preferenceCurrentTutorial = "currentTutorial"
@@ -70,14 +73,34 @@ func main() {
 		split.Offset = 0.2
 		w.SetContent(split)
 	}
-	go runProxy()
+	go runProxy(w)
 	w.Resize(fyne.NewSize(640, 460))
 	w.ShowAndRun()
 }
 
-func runProxy()  {
+func Succ(w fyne.Window, e chan <- error)  {
+	time.Sleep(time.Second * 5)
+	dialog.ShowInformation("Server Status", "Proxy Service Started Successfully: localhost:9876", w)
+}
+
+func runProxy(w fyne.Window)  {
+	fmt.Println("%%%%%%%%%%")
+	var err error
 	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe("0.0.0.0:9876", nil))
+	time.AfterFunc(time.Duration(time.Second * 3), func() {
+		if err == nil {
+			dialog.ShowInformation("Server Status", "Proxy Service Started Successfully: localhost:9876", w)
+		}
+	})
+
+	//cErr := make(chan error)
+	//go Succ(w, cErr)
+	err = http.ListenAndServe("0.0.0.0:9876", nil)
+	if err != nil {
+		//cErr <- err
+		dialog.ShowError(errors.New("ListenAndServe Error Check The 9876 Port Occupied"), w)
+	}
+	//log.Fatal(http.ListenAndServe("0.0.0.0:9876", nil))
 }
 func handler(w http.ResponseWriter, r *http.Request) {
 	var proxyHost = "http://localhost:8088"
