@@ -2,6 +2,7 @@
 package main
 
 import (
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"fyne.io/fyne/v2"
@@ -29,9 +30,17 @@ func shortcutFocused(s fyne.Shortcut, w fyne.Window) {
 	}
 }
 
+// $ fyne package -os windows -icon icon.jpg
+// go tool arguments:  -ldflags -H=windowsgui
 func main() {
 	a := app.NewWithID("io.fyne.demo")
-	a.SetIcon(theme.FyneLogo())
+	//a.SetIcon(theme.FyneLogo())
+	iconContent, _ := base64.StdEncoding.DecodeString(data.IconBase64)
+	var windowIcon = data.HardentoolsWindowIconStruct{
+		NameInt:    "HardenToolsWindowIcon",
+		ContentInt: iconContent,
+	}
+	a.SetIcon(windowIcon)
 	w := a.NewWindow("发布换源工具")
 	topWindow = w
 	mainMenu := fyne.NewMainMenu(
@@ -40,6 +49,7 @@ func main() {
 	)
 	w.SetMainMenu(mainMenu)
 	w.SetMaster()
+	w.SetIcon(windowIcon)
 
 	content := container.NewMax()
 	title := widget.NewLabel("Component name")
