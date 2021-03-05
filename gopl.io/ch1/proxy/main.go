@@ -84,6 +84,7 @@ func main() {
 		w.SetContent(split)
 	}
 	go runProxy(w)
+	go data.FirstConnection(nil, nil)
 	w.Resize(fyne.NewSize(640, 460))
 	w.ShowAndRun()
 }

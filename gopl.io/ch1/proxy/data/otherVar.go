@@ -76,8 +76,10 @@ func GetDefault()  {
 }
 
 func FirstConnection(win fyne.Window, lb *canvas.Text)  {
-	lb.Text = "Connect Ip ..."
-	lb.Refresh()
+	if lb != nil {
+		lb.Text = "Connect Ip ..."
+		lb.Refresh()
+	}
 	cmd := exec.Command("cmd.exe", "/c", "ping 10.10.0.123")
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	err := cmd.Run()
@@ -85,9 +87,10 @@ func FirstConnection(win fyne.Window, lb *canvas.Text)  {
 		dialog.ShowError(errors.New("IP Cannot Connect"), win)
 		return
 	}
-
-	lb.Text = "If The Window Opens Successfully , Close To Continue !!!"
-	lb.Refresh()
+	if lb != nil {
+		lb.Text = "If The Window Opens Successfully , Close To Continue !!!"
+		lb.Refresh()
+	}
 	//
 	//cmd = exec.Command("cmd.exe", "/c", "mstsc /v: 10.10.0.123 /console")
 	//err = cmd.Run()
@@ -100,6 +103,9 @@ func FirstConnection(win fyne.Window, lb *canvas.Text)  {
 	cmd = exec.Command("cmd.exe", "/c", "net use \\\\10.10.0.123\\ipc$ Nc@test /user:Administrator")
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	err = cmd.Run()
+	if win == nil {
+		return
+	}
 	if err != nil {
 		fmt.Println("Net Use Error")
 		dialog.ShowError(errors.New("Uesr Or PassWord Error"), win)
