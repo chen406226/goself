@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"regexp"
 	"time"
 )
 
@@ -33,6 +34,7 @@ func shortcutFocused(s fyne.Shortcut, w fyne.Window) {
 // $ fyne package -os windows -icon icon.jpg
 // go tool arguments:  -ldflags -H=windowsgui
 func main() {
+	fmt.Println("KLSFDJKLJFDSLKJFSDLKDFSJKLDFSJ")
 	a := app.NewWithID("io.fyne.demo")
 	//a.SetIcon(theme.FyneLogo())
 	iconContent, _ := base64.StdEncoding.DecodeString(data.IconBase64)
@@ -114,18 +116,26 @@ func runProxy(w fyne.Window)  {
 	//log.Fatal(http.ListenAndServe("0.0.0.0:9876", nil))
 }
 func handler(w http.ResponseWriter, r *http.Request) {
-	var proxyHost = "http://localhost:8088"
+	//var proxyHost = "http://localhost:8088"
+	//w.Header().Set("Access-Control-Allow-Origin", "*")
+	var proxyHost = "0.0.0.0:8088"
+	r.Host = "0.0.0.0:8080"
 	for _, v := range data.CashData.ProviderList {
 		if  v.Name == data.RunName {
 			proxyHost = v.Host
+			reg := regexp.MustCompile(`\w+`)
+			if reg.FindAllString("localhost", -1) != nil {
+				proxyHost = "http://localhost:8088"
+				r.Host = "localhost:8080"
+			}
 		}
 	}
-	//fmt.Println(proxyHost)
+
 	remote, err := url.Parse(proxyHost)
+	fmt.Println(remote)
 	if err != nil {
 		panic(err)
 	}
-	r.Host = "localhost:8080"
 	proxy := httputil.NewSingleHostReverseProxy(remote)
 	proxy.ServeHTTP(w, r)
 }
