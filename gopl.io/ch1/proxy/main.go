@@ -31,7 +31,7 @@ func shortcutFocused(s fyne.Shortcut, w fyne.Window) {
 	}
 }
 
-// $ fyne package -os windows -icon icon.jpg
+// $ fyne package -os windows -icon icon.png
 // go tool arguments:  -ldflags -H=windowsgui
 func main() {
 	fmt.Println("KLSFDJKLJFDSLKJFSDLKDFSJKLDFSJ")
@@ -123,8 +123,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	for _, v := range data.CashData.ProviderList {
 		if  v.Name == data.RunName {
 			proxyHost = v.Host
-			reg := regexp.MustCompile(`\w+`)
-			if reg.FindAllString("localhost", -1) != nil {
+			reg := regexp.MustCompile(`localhost`)
+			if reg.FindAllString(v.Host, -1) != nil {
 				proxyHost = "http://localhost:8088"
 				r.Host = "localhost:8080"
 			}
