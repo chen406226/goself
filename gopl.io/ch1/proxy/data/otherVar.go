@@ -116,12 +116,24 @@ func FirstConnection(win fyne.Window, lb *canvas.Text)  {
 func MoveFile(win fyne.Window, lb *canvas.Text)  {
 	t := strings.Replace(CashData.SourceFolder,"/","\\",100)
 	buildFolder := CashData.SourceFolder + "/src/Presentation/NCManageUI"
+
+	lb.Text = "pull code from origin/master"
+	lb.Refresh()
+
+	cmd := exec.Command("cmd.exe", "/c", "cd/d "+ buildFolder +" && git pull")
+	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+	err := cmd.Run()
+	if err != nil {
+		dialog.ShowError(errors.New("pull code Error"), win)
+		return
+	}
+
 	lb.Text = "Build Project ..."
 	lb.Refresh()
 
-	cmd := exec.Command("cmd.exe", "/c", "cd/d "+ buildFolder +" && npm run build")
+	cmd = exec.Command("cmd.exe", "/c", "cd/d "+ buildFolder +" && npm run build")
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
-	err := cmd.Run()
+	err = cmd.Run()
 	if err != nil {
 		dialog.ShowError(errors.New("Build Error"), win)
 		return
