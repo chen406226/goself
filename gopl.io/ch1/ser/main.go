@@ -1,10 +1,13 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net"
 	"net/http"
+	"strings"
 )
 
 var count int
@@ -41,6 +44,10 @@ func reset(w http.ResponseWriter, r *http.Request) {
 // counter echoes the number of calls so far.
 func counter(w http.ResponseWriter, r *http.Request) {
 	keys, ok := r.URL.Query()["phone"]
+	self, oks := r.URL.Query()["who"]
+	if oks && len(self) > 1 {
+		log.Println("管理员查看的----")
+	}
 	sum++
 	fmt.Println("来了---", sum, "结束；；；；；；")
 	if !ok || len(keys) < 1 {
@@ -59,6 +66,8 @@ func counter(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "手机号错误")
 		return
 	}
+	ip, _:= GetIP(r)
+	log.Println("IP地址是---",ip)
 	count++
 	log.Println("查看了---",count, "结束；；；；；；")
 	fmt.Fprintln(w, msg)
@@ -67,3 +76,28 @@ func counter(w http.ResponseWriter, r *http.Request) {
 	//fmt.Fprintf(w, "Count %d\n", count)
 }
 
+// GetIP returns request real ip.
+func GetIP(r *http.Request) (string, error) {
+	ip := r.Header.Get("X-Real-IP")
+	if net.ParseIP(ip) != nil {
+		return ip, nil
+	}
+
+	ip = r.Header.Get("X-Forward-For")
+	for _, i := range strings.Split(ip, ",") {
+		if net.ParseIP(i) != nil {
+			return i, nil
+		}
+	}
+
+	ip, _, err := net.SplitHostPort(r.RemoteAddr)
+	if err != nil {
+		return "", err
+	}
+
+	if net.ParseIP(ip) != nil {
+		return ip, nil
+	}
+
+	return "", errors.New("no valid ip found")
+}
