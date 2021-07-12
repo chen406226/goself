@@ -125,8 +125,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			proxyHost = v.Host
 			reg := regexp.MustCompile(`localhost`)
 			if reg.FindAllString(v.Host, -1) != nil {
-				proxyHost = "http://localhost:8088"
-				r.Host = "localhost:8080"
+				//proxyHost = "http://localhost:8088"
+				proxyHost = v.Host
+				r.Host = v.Host[7:]
+				//r.Host = "localhost:8080"
 			}
 		}
 	}

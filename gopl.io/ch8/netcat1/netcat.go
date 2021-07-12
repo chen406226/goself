@@ -18,6 +18,7 @@ func main() {
 	conn, err := net.Dial("tcp", "localhost:8000")
 
 	if err != nil {
+		log.Print("健康离开家离开家离开家")
 		log.Fatal(err)
 	}
 	defer conn.Close()
