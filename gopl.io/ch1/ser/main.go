@@ -16,6 +16,7 @@ var msg = ""
 func main() {
 	http.HandleFunc("/time", handler)
 	http.HandleFunc("/love", counter)
+	http.HandleFunc("/ip", gelid)
 	http.HandleFunc("/reset", reset)
 	msg = LoadMsg()
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
@@ -35,6 +36,15 @@ func LoadMsg() string {
 func handler(w http.ResponseWriter, r *http.Request) {
 	log.Println("定时器开始---",count, "结束；；；；；；")
 }
+func gelid(w http.ResponseWriter, r *http.Request) {
+	keys, ok := r.URL.Query()["ip"]
+	if !ok || len(keys) < 1 {
+		log.Println("ip地址错误")
+		return
+	}
+	key := keys[0]
+	log.Println("ip地址访问了---", key)
+}
 // handler echoes the Path component of the requested URL.
 func reset(w http.ResponseWriter, r *http.Request) {
 	msg = LoadMsg()
@@ -44,8 +54,8 @@ func reset(w http.ResponseWriter, r *http.Request) {
 // counter echoes the number of calls so far.
 func counter(w http.ResponseWriter, r *http.Request) {
 	keys, ok := r.URL.Query()["phone"]
-	self, oks := r.URL.Query()["who"]
-	if oks && len(self) > 1 {
+	_, oks := r.URL.Query()["who"]
+	if oks {
 		log.Println("管理员查看的----")
 	}
 	sum++
@@ -66,8 +76,8 @@ func counter(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "手机号错误")
 		return
 	}
-	ip, _:= GetIP(r)
-	log.Println("IP地址是---",ip)
+	//ip, _:= GetIP(r)
+	//log.Println("IP地址是---",ip)
 	count++
 	log.Println("查看了---",count, "结束；；；；；；")
 	fmt.Fprintln(w, msg)
