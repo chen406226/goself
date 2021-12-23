@@ -131,7 +131,7 @@ func MoveFile(win fyne.Window, lb *canvas.Text)  {
 	lb.Text = "Build Project ..."
 	lb.Refresh()
 
-	cmd = exec.Command("cmd.exe", "/c", "cd/d "+ buildFolder +" && npm run build")
+	cmd = exec.Command("cmd.exe", "/c", "cd/d "+ buildFolder +" && npm run build:test")
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	err = cmd.Run()
 	if err != nil {
