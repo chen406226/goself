@@ -2,5 +2,48 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/agext/levenshtein" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/apparentlymart/go-textseg" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/bketelsen/crypt" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/davecgh/go-spew" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/denisenkom/go-mssqldb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/erikstmartin/go-testdb" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/fsnotify/fsnotify" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/go-sql-driver/mysql" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/golang-sql/civil" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/hashicorp/hcl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/jinzhu/gorm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/jinzhu/inflection" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/jinzhu/now" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/jonboulle/clockwork" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/kr/pretty" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/kr/text" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/lestrrat/go-file-rotatelogs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/lestrrat/go-strftime" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/lib/pq" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/magiconair/properties" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/mattn/go-sqlite3" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/mitchellh/go-wordwrap" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/mitchellh/mapstructure" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/op/go-logging" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/pelletier/go-toml" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/pkg/errors" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/pmezard/go-difflib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/rogpeppe/go-internal" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/satori/go.uuid" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/spf13/afero" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/spf13/cast" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/spf13/jwalterweatherman" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/spf13/pflag" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/spf13/viper" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/stretchr/testify" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/subosito/gotenv" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/github.com/zclconf/go-cty" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/golang.org/x/text" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gopkg.in/check.v1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gopkg.in/ini.v1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gopkg.in/yaml.v2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gopkg.in/yaml.v3" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gorm.io/gorm" vcs="Git" />
   </component>
 </project>
