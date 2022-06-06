@@ -68,15 +68,19 @@ func (i *Image) Alpha() float64 {
 	return 1.0 - i.Translucency
 }
 
-// Resize on an image will usually scale the content or reposition it according to FillMode..
-// If the content of the File or Resource is an SVG file, however, this will cause a Refresh.
+// Resize on an image will scale the content or reposition it according to FillMode.
+// It will normally cause a Refresh to ensure the pixels are recalculated.
 func (i *Image) Resize(s fyne.Size) {
+	if s == i.Size() {
+		return
+	}
+	if i.FillMode == ImageFillOriginal && i.size.Height > 2 { // don't refresh original scale images after first draw
+		return
+	}
+
 	i.baseObject.Resize(s)
 
-	if (i.File != "" && filepath.Ext(i.File) == ".svg") ||
-		(i.Resource != nil && filepath.Ext(i.Resource.Name()) == ".svg") {
-		Refresh(i)
-	}
+	Refresh(i)
 }
 
 // Refresh causes this object to be redrawn in it's current state
@@ -95,6 +99,7 @@ func NewImageFromFile(file string) *Image {
 
 // NewImageFromURI creates a new image from named resource.
 // File URIs will read the file path and other schemes will download the data into a resource.
+// HTTP and HTTPs URIs will use the GET method by default to request the resource.
 // Images returned from this method will scale to fit the canvas object.
 // The method for scaling can be set using the Fill field.
 //
@@ -108,10 +113,10 @@ func NewImageFromURI(uri fyne.URI) *Image {
 
 	var read io.ReadCloser
 
-	read, err := storage.Reader(uri) // attempt unknown file type
+	read, err := storage.Reader(uri) // attempt unknown / http file type
 	if err != nil {
 		fyne.LogError("Failed to open image URI", err)
-		return nil
+		return &Image{}
 	}
 
 	defer read.Close()

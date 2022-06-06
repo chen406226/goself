@@ -75,8 +75,8 @@ func main() {
     fmt.Println("sdflkjksdf")
     f := openFile("bundled-scene.go")
 
-    bundleFile("fynescenedark", "dark.png", f)
-    //bundleFile("fynescenelight", "light.png", f)
+    bundleFile("fynescenedark", "sf.jpeg", f)
+    bundleFile("fynescenelight", "light.jpg", f)
 
     f.Close()
 }

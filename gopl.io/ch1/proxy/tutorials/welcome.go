@@ -20,21 +20,27 @@ func parseURL(urlStr string) *url.URL {
 	return link
 }
 
-func welcomeScreen(_ fyne.Window) fyne.CanvasObject {
-	logo := canvas.NewImageFromResource(data.FyneScene)
-	logo.FillMode = canvas.ImageFillContain
-	if fyne.CurrentDevice().IsMobile() {
-		logo.SetMinSize(fyne.NewSize(540, 480))
-	} else {
-		logo.SetMinSize(fyne.NewSize(540, 480))
-	}
+func welcomeScreen(win fyne.Window) fyne.CanvasObject {
+	text := canvas.NewText("切换代理服务地址", nil)
+	text.Alignment = fyne.TextAlignLeading
+	text.TextStyle = fyne.TextStyle{Italic: true}
+
+	//logo := canvas.NewImageFromResource(data.FyneScene)
+	//logo.FillMode = canvas.ImageFillContain
+	//if fyne.CurrentDevice().IsMobile() {
+	//	logo.SetMinSize(fyne.NewSize(360, 320))
+	//} else {
+	//	logo.SetMinSize(fyne.NewSize(360, 320))
+	//}
 	//data.BundleFile("fynescenedark", "dark.jpg")
 	//data.BundleFile("fynescenelight", "light.jpg")
-	runName := "Server Provider: " + data.RunName
+	runName := "当前代理服务: " + data.RunName
 
-	return container.NewCenter(container.NewVBox(
+	return container.NewVBox(container.NewVBox(
 		widget.NewLabelWithStyle(runName, fyne.TextAlignCenter, fyne.TextStyle{Bold: true}),
-		logo,
+		text,
+		windowScreen(win),
+		//logo,
 	))
 }
 
@@ -48,23 +54,20 @@ var TestT string
 
 func webBuild(win fyne.Window) fyne.CanvasObject {
 
-	title := &widget.TextGrid{}
-	title.SetText("If First Use This App Or Server Computer Was Restarted")
+	title := canvas.NewText("服务连接测试", nil)
 
-	title2 := &widget.TextGrid{}
-	title2.SetText("Your project Dir:" + data.SourceFolder)
+	title2 := canvas.NewText("当前项目地址:" + data.SourceFolder, nil)
 
 	var selectList []string
-	selectList = append(selectList, "10.10.0.123")
-	//for _, v := range data.CashData.ProviderList {
-	//	selectList = append(selectList, v.Name)
-	//}
+	for _, v := range data.CashData.PublishList {
+		selectList = append(selectList, v.Name)
+	}
 	selectV := widget.NewSelect(selectList,
 		func(s string) {
 
 		},
 	)
-	selectV.Selected = "10.10.0.123"
+	selectV.Selected = data.CashData.PubName
 	infProgress := widget.NewProgressBarInfinite()
 	//lb := widget.NewLabel("Please Wait ,Building...")
 	lb := canvas.NewText("Please Wait Building...",color.RGBA{
@@ -79,7 +82,7 @@ func webBuild(win fyne.Window) fyne.CanvasObject {
 		lb,
 		infProgress,
 		selectV,
-		widget.NewButton("Change Project Folder", func() {
+		widget.NewButton("更改项目文件夹", func() {
 			dialog.ShowFolderOpen(func(list fyne.ListableURI, err error) {
 				if err != nil {
 					dialog.ShowError(err, win)
@@ -95,16 +98,20 @@ func webBuild(win fyne.Window) fyne.CanvasObject {
 					return
 				}
 				data.SourceFolder = list.String()[7:]
-				title2.SetText("Your project Dir:" + data.SourceFolder)
+				title2.Text = "当前项目地址:" + data.SourceFolder
+				title2.Refresh()
+				//title2.SetText("Your project Dir:" + data.SourceFolder)
 				//out := fmt.Sprintf("Folder %s (%d children):\n%s", list.Name(), len(children), list.String())
 				//title2.SetText()
 				//dialog.ShowInformation("Folder Open", out, win)
 			}, win)
 		}),
 		title2,
-		widget.NewButton("Run Publish",
+		widget.NewButton("开始发布",
 			func() {
 				data.CashData.SourceFolder = data.SourceFolder
+				data.CashData.PubName = selectV.Selected
+				data.SaveDefault()
 				//data.SourceFolder = title2.Text()
 				data.SaveDefault()
 				lb.Text="Please Wait ,Building..."
@@ -117,9 +124,9 @@ func webBuild(win fyne.Window) fyne.CanvasObject {
 		),
 		EnpytT(1),
 		title,
-		widget.NewButton("Connect Teleservice",
+		widget.NewButton("连接服务测试",
 			func() {
-				lb.Text="Please Wait ,Linking..."
+				lb.Text="请等待，发布中..."
 				lb.Show()
 				infProgress.Show()
 				data.FirstConnection(win, lb)

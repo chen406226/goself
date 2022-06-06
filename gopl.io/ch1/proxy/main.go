@@ -7,12 +7,14 @@ import (
 	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 	"gopl.io/ch1/proxy/data"
+	_ "gopl.io/ch1/proxy/font"
 	"gopl.io/ch1/proxy/tutorials"
 	"net/http"
 	"net/http/httputil"
@@ -35,6 +37,7 @@ func shortcutFocused(s fyne.Shortcut, w fyne.Window) {
 // go tool arguments:  -ldflags -H=windowsgui
 func main() {
 	fmt.Println("KLSFDJKLJFDSLKJFSDLKDFSJKLDFSJ")
+	//os.Setenv("FYNE_FONT", "Microsoft YaHei UI.ttf")
 	a := app.NewWithID("io.fyne.demo")
 	//a.SetIcon(theme.FyneLogo())
 	iconContent, _ := base64.StdEncoding.DecodeString(data.IconBase64)
@@ -47,7 +50,7 @@ func main() {
 	topWindow = w
 	mainMenu := fyne.NewMainMenu(
 		// a quit item will be appended to our first menu
-		fyne.NewMenu("Set", fyne.NewMenuItemSeparator()),
+		fyne.NewMenu("tools", fyne.NewMenuItemSeparator()),
 	)
 	w.SetMainMenu(mainMenu)
 	w.SetMaster()
@@ -86,7 +89,7 @@ func main() {
 		w.SetContent(split)
 	}
 	go runProxy(w)
-	go data.FirstConnection(nil, nil)
+	go data.FirstConnection(w, nil)
 	w.Resize(fyne.NewSize(640, 460))
 	w.ShowAndRun()
 }
@@ -97,12 +100,13 @@ func Succ(w fyne.Window, e chan <- error)  {
 }
 
 func runProxy(w fyne.Window)  {
-	fmt.Println("%%%%%%%%%%")
 	var err error
 	http.HandleFunc("/", handler)
 	time.AfterFunc(time.Duration(time.Second * 3), func() {
 		if err == nil {
-			dialog.ShowInformation("Server Status", "Proxy Service Started Successfully: localhost:9876", w)
+			dialog.ShowInformation("Success", "代理服务启动成功: localhost:9876", w)
+		} else {
+			dialog.ShowInformation("Error", "代理服务启动失败", w)
 		}
 	})
 
@@ -135,6 +139,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	remote, err := url.Parse(proxyHost)
 	fmt.Println(remote)
+	fmt.Println(r)
 	if err != nil {
 		panic(err)
 	}
@@ -178,7 +183,8 @@ func makeNav(setTutorial func(tutorial tutorials.Tutorial), loadPrevious bool) f
 		tree.Select(currentPref)
 	}
 
-	themes := fyne.NewContainerWithLayout(layout.NewGridLayout(2),
+
+	themes := container.New(layout.NewGridLayout(2),
 		widget.NewButton("Dark", func() {
 			a.Settings().SetTheme(theme.DarkTheme())
 		}),
@@ -186,6 +192,10 @@ func makeNav(setTutorial func(tutorial tutorials.Tutorial), loadPrevious bool) f
 			a.Settings().SetTheme(theme.LightTheme())
 		}),
 	)
+	logo := canvas.NewImageFromResource(data.FyneScene)
+	logo.FillMode = canvas.ImageFillContain
+	logo.SetMinSize(fyne.NewSize(180, 160))
+	st:=container.NewVBox(logo, themes)
 
-	return container.NewBorder(nil, themes, nil, nil, tree)
+	return container.NewBorder(nil, st, nil, nil, tree)
 }

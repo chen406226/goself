@@ -82,7 +82,6 @@ func (c *Container) MinSize() Size {
 // Move the container (and all its children) to a new position, relative to its parent.
 func (c *Container) Move(pos Position) {
 	c.position = pos
-	c.layout()
 }
 
 // Position gets the current position of this Container, relative to its parent.
@@ -140,6 +139,8 @@ func (c *Container) Refresh() {
 }
 
 // Remove updates the contents of this container to no longer include the specified object.
+// This method is not intended to be used inside a loop, to remove all the elements.
+// It is much more efficient to just set .Objects to nil instead.
 func (c *Container) Remove(rem CanvasObject) {
 	if len(c.Objects) == 0 {
 		return
@@ -150,9 +151,12 @@ func (c *Container) Remove(rem CanvasObject) {
 			continue
 		}
 
-		copy(c.Objects[i:], c.Objects[i+1:])
-		c.Objects[len(c.Objects)-1] = nil
-		c.Objects = c.Objects[:len(c.Objects)-1]
+		removed := make([]CanvasObject, len(c.Objects)-1)
+		copy(removed, c.Objects[:i])
+		copy(removed[i:], c.Objects[i+1:])
+
+		c.Objects = removed
+		c.layout()
 		return
 	}
 }

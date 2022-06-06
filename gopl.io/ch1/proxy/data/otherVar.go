@@ -16,13 +16,23 @@ import (
 
 type Config struct {
 	ProviderList   	[]User  	`json:"providerList"`
-	Default					string		`json:"default"`
-	SourceFolder		string		`json:"sourceFolder"`
+	PublishList   	[]Pub  		`json:"publishList"`
+	Default			string		`json:"default"`
+	PubName			string		`json:"pubName"`
+	SourceFolder	string		`json:"sourceFolder"`
 }
 
 type User struct {
 	Name 	string	`json:"name"`
 	Host	string	`json:"host"`
+}
+type Pub struct {
+	Name 	string	`json:"name"`
+	IP	string	`json:"ip"`
+	User	string	`json:"user"`
+	Pass	string	`json:"pass"`
+	ToDir	string  `json:"toDir"`
+	Build	string  `json:"build"`
 }
 
 var(
@@ -35,9 +45,19 @@ var(
 			User{Name: "ZhangZeng",Host: "http://10.10.0.43:8088"},
 			User{Name: "HouZhiYong",Host: "http://10.10.0.76:8200"},
 		},
+		PublishList: []Pub {
+			{Name: "PC测试",
+				IP: "10.10.0.123",
+				User: "Administrator",
+				Pass: "Nc@test",
+				ToDir: "D\\public\\NcManageUI",
+				Build: "npm run build:test"},
+		},
+		PubName: "PC测试",
 		SourceFolder : "",
 	}
 	RunName = "Dev"
+	PubName = "PC测试"
 	SourceFolder = ""
 )
 
@@ -75,16 +95,31 @@ func GetDefault()  {
 
 }
 
+func GetPub() (s Pub, err error) {
+	for _, v := range CashData.PublishList {
+		if v.Name == CashData.PubName {
+			return v,nil
+		}
+	}
+	err = errors.New("not find")
+	return s, err
+}
+
 func FirstConnection(win fyne.Window, lb *canvas.Text)  {
+	pub, errs:= GetPub()
+	if errs != nil {
+		dialog.ShowError(errors.New("未查找到发布服务信息"), win)
+		return
+	}
 	if lb != nil {
-		lb.Text = "Connect Ip ..."
+		lb.Text = "连接中..."
 		lb.Refresh()
 	}
-	cmd := exec.Command("cmd.exe", "/c", "ping 10.10.0.123")
+	cmd := exec.Command("cmd.exe", "/c", "ping "+pub.IP)
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	err := cmd.Run()
 	if err != nil {
-		dialog.ShowError(errors.New("IP Cannot Connect"), win)
+		dialog.ShowError(errors.New("发布服务ip查找失败"), win)
 		return
 	}
 	if lb != nil {
@@ -94,13 +129,8 @@ func FirstConnection(win fyne.Window, lb *canvas.Text)  {
 	//
 	//cmd = exec.Command("cmd.exe", "/c", "mstsc /v: 10.10.0.123 /console")
 	//err = cmd.Run()
-	//fmt.Println("%%%%%%%%%%%%%%%")
-	//
-	//if err != nil {
-	//	dialog.ShowError(errors.New("Connection Error"), win)
-	//	return
-	//}
-	cmd = exec.Command("cmd.exe", "/c", "net use \\\\10.10.0.123\\ipc$ Nc@test /user:Administrator")
+	//cmd = exec.Command("cmd.exe", "/c", "net use \\\\10.10.0.123\\ipc$ Nc@test /user:Administrator")
+	cmd = exec.Command("cmd.exe", "/c", "net use \\\\"+pub.IP+"\\ipc$ "+pub.Pass+" /user:"+pub.User)
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	err = cmd.Run()
 	if win == nil {
@@ -108,14 +138,20 @@ func FirstConnection(win fyne.Window, lb *canvas.Text)  {
 	}
 	if err != nil {
 		fmt.Println("Net Use Error")
-		dialog.ShowError(errors.New("Uesr Or PassWord Error"), win)
+		dialog.ShowError(errors.New("发布服务用户名或密码错误"), win)
+		return
 	}
-	dialog.ShowInformation("Success", "Connection successful", win)
+	dialog.ShowInformation("Success", "发布服务连接成功", win)
 }
 
 func MoveFile(win fyne.Window, lb *canvas.Text)  {
+	pub, errs:= GetPub()
+	if errs != nil {
+		dialog.ShowError(errors.New("未查找到发布服务信息"), win)
+		return
+	}
 	t := strings.Replace(CashData.SourceFolder,"/","\\",100)
-	buildFolder := CashData.SourceFolder + "/src/Presentation/NCManageUI"
+	buildFolder := CashData.SourceFolder
 
 	lb.Text = "pull code from origin/master"
 	lb.Refresh()
@@ -131,7 +167,7 @@ func MoveFile(win fyne.Window, lb *canvas.Text)  {
 	lb.Text = "Build Project ..."
 	lb.Refresh()
 
-	cmd = exec.Command("cmd.exe", "/c", "cd/d "+ buildFolder +" && npm run build:test")
+	cmd = exec.Command("cmd.exe", "/c", "cd/d "+ buildFolder +" && "+pub.Build)
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	err = cmd.Run()
 	if err != nil {
@@ -140,7 +176,8 @@ func MoveFile(win fyne.Window, lb *canvas.Text)  {
 	}
 	lb.Text = "Send File ..."
 	lb.Refresh()
-	cmd = exec.Command("cmd.exe", "/c", "xcopy "+t+"\\src\\Presentation\\NCManageUI\\dist \\\\10.10.0.123\\D\\public\\NcManageUI /s/e/y")
+	cmd = exec.Command("cmd.exe", "/c", "xcopy "+t+"\\dist \\\\"+pub.IP+"\\"+pub.ToDir+" /s/e/y")
+	//cmd = exec.Command("cmd.exe", "/c", "xcopy "+t+"\\src\\Presentation\\NCManageUI\\dist \\\\10.10.0.123\\D\\public\\NcManageUI /s/e/y")
 	//cmd = exec.Command("cmd.exe", "/c", "xcopy "+t+"\\src\\Presentation\\NCManageUI\\dist \\\\10.10.0.123\\D\\test /s/e/y")
 	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
 	err = cmd.Run()

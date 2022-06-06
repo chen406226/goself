@@ -18,17 +18,22 @@ type Tutorial struct {
 var (
 	// Tutorials defines the metadata for each tutorial
 	Tutorials = map[string]Tutorial{
-		"welcome": {"Home", "", welcomeScreen},
-		"binding": {"Add Web Server",
-			"Don't Input Chinese",
-			bindingScreen},
+		"welcome": {"首页", "", welcomeScreen},
 		"animations": {"Animations",
 			"See how to animate components.",
 			makeAnimationScreen,
 		},
-		"webBuild": {"Web Auto Publish",
-			"Please select the project root file address",
+		"webBuild": {"Web发布",
+			"选择要发布的服务",
 			webBuild,
+		},
+		"binding": {"新增代理服务",
+			"用于新增代理服务，热切。免重启。",
+			bindingScreen,
+		},
+		"addPub": {"新增发布服务",
+			"用于新增发布服务，",
+			addPubScreen,
 		},
 		"containers": {"Containers",
 			"Containers group other widgets and canvas objects, organising according to their layout.\n" +
@@ -139,7 +144,7 @@ var (
 
 	// TutorialIndex  defines how our tutorials should be laid out in the index tree
 	TutorialIndex = map[string][]string{
-		"":            {"welcome", "windows", "binding", "webBuild"},
+		"":            {"welcome", "webBuild", "binding", "addPub"},
 		"collections": {"list", "table", "tree"},
 		"containers":  {"apptabs", "border", "box", "center", "grid", "split", "scroll"},
 		"widgets":     {"accordion", "button", "card", "entry", "form", "input", "text", "toolbar", "progress"},

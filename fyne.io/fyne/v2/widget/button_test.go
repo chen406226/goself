@@ -65,9 +65,9 @@ func TestButton_Tapped(t *testing.T) {
 }
 
 func TestButton_Disable(t *testing.T) {
-	app := test.NewApp()
+	test.NewApp()
 	defer test.NewApp()
-	app.Settings().SetTheme(theme.LightTheme())
+	test.ApplyTheme(t, theme.LightTheme())
 
 	tapped := false
 	button := widget.NewButtonWithIcon("Test", theme.HomeIcon(), func() {
@@ -121,6 +121,35 @@ func TestButton_Disabled(t *testing.T) {
 	assert.False(t, button.Disabled())
 }
 
+func TestButton_Hover(t *testing.T) {
+	test.NewApp()
+	defer test.NewApp()
+	test.ApplyTheme(t, theme.LightTheme())
+
+	b := widget.NewButtonWithIcon("Test", theme.HomeIcon(), func() {})
+	w := test.NewWindow(b)
+	defer w.Close()
+
+	if !fyne.CurrentDevice().IsMobile() {
+		test.MoveMouse(w.Canvas(), fyne.NewPos(5, 5))
+		test.AssertImageMatches(t, "button/hovered.png", w.Canvas().Capture())
+	}
+
+	b.Importance = widget.HighImportance
+	b.Refresh()
+	if !fyne.CurrentDevice().IsMobile() {
+		test.AssertImageMatches(t, "button/high_importance_hovered.png", w.Canvas().Capture())
+
+		test.MoveMouse(w.Canvas(), fyne.NewPos(0, 0))
+		b.Refresh()
+	}
+	test.AssertImageMatches(t, "button/high_importance.png", w.Canvas().Capture())
+
+	b.Importance = widget.MediumImportance
+	b.Refresh()
+	test.AssertImageMatches(t, "button/initial.png", w.Canvas().Capture())
+}
+
 func TestButton_Layout(t *testing.T) {
 	test.NewApp()
 	defer test.NewApp()
@@ -160,6 +189,10 @@ func TestButton_Layout(t *testing.T) {
 			text:      "Test",
 			alignment: widget.ButtonAlignTrailing,
 			placement: widget.ButtonIconTrailingText,
+		},
+		"text_only_multiline": {
+			text:      "Test\nLine2",
+			alignment: widget.ButtonAlignCenter,
 		},
 		"icon_only_center_leading": {
 			icon:      theme.CancelIcon(),
